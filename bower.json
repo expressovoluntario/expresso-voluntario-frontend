@@ -1,0 +1,23 @@
+{
+  "name": "expresso-voluntario-frontend",
+  "homepage": "https://github.com/expressovoluntario/expresso-voluntario-frontend",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "~3.5.0",
+    "angular": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-material": "~1.0.1",
+    "pure": "~0.6.0"
+  }
+}
