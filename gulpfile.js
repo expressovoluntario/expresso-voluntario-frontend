@@ -10,7 +10,7 @@ var compass = require('gulp-compass');
 gulp.task('compass', function() {
     gulp.src('./sass/**/*.scss')
         .pipe(compass({
-            css: 'app/css',
+            css: 'app/stylesheets',
             sass: 'sass',
             image: 'app/images'
         }));
@@ -28,7 +28,7 @@ gulp.task('watch', function () {
     });
 
     gulp.watch(
-        ['*.html', 'css/**/*.css', '**/*.js'],
+        ['*.html', 'stylesheets/**/*.css', '**/*.js'],
         { 'cwd' : 'app'},
         browserSyncReload
     );
