@@ -19,7 +19,7 @@ gulp.task('compass', function() {
 
 /*
     * ## TASK watch
-    * Sobe um servidor para a aplicação e injeta recarrega o browser após
+    * Sobe um servidor para a aplicação e recarrega o browser após
     * alterações (scss, css, html, js)
 */
 gulp.task('watch', function () {
