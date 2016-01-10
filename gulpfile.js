@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var browserSyncReload = browserSync.reload;
 var compass = require('gulp-compass');
+var concat = require('gulp-concat');
+
 
 /*
     * ## TASK compass
@@ -10,10 +12,21 @@ var compass = require('gulp-compass');
 gulp.task('compass', function() {
     gulp.src('./sass/**/*.scss')
         .pipe(compass({
-            css: 'app/stylesheets',
+            css: 'app/assets-generated/css',
             sass: 'sass',
             image: 'app/images'
         }));
+});
+
+
+/*
+    * ## TASK js-concat
+    * Concatena todos os arquivos de app/components e app/modules em scripts.js
+*/
+gulp.task('js-concat', function() {
+    gulp.src(['app/app.js', 'app/components/**/*.js', 'app/modules/**/*.js'])
+       .pipe(concat('scripts.js'))
+       .pipe(gulp.dest('app/assets-generated/js'));
 });
 
 
@@ -27,12 +40,8 @@ gulp.task('watch', function () {
         'server' : { 'baseDir' : '.'}
     });
 
-    gulp.watch(
-        ['*.html', 'app/stylesheets/**/*.css', 'app/**/*.js'],
-        { 'cwd' : '.'},
-        browserSyncReload
-    );
-
+    gulp.watch(['*.html', 'app/assets/css/*.css'], { 'cwd' : '.'}, browserSyncReload);
+    gulp.watch('app/**/*.js', ['js-concat', browserSyncReload]);
     gulp.watch('sass/**/*.scss', ['compass']);
 });
 
