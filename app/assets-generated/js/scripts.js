@@ -30,6 +30,10 @@ angular.module('expresso.components', [
             .state('home', {
                 url: "/",
                 templateUrl: "/app/modules/home/home.html"
+            })
+            .state('home2', {
+                url: "",
+                templateUrl: "/app/modules/home/home.html"
             });
     }
 
