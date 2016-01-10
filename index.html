@@ -2,11 +2,31 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Expresso Voluntário</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Expresso Voluntário - Início</title>
 
-        <link rel="stylesheet" href="/bower_components/pure/grids-responsive-min.css">
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+        <link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css">
     </head>
-    <body>
+    <body ng-app="MyApp">
+        <div ng-controller="MyController" ng-cloak>
+            <h1>Hello World!</h1>
+        </div>
 
+        <!-- JAVASCRIPT IMPORTS -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-material/angular-material.js"></script>
+        <script>
+            angular.module( 'MyApp', [ 'ngMaterial'] )
+                .controller("MyController", MyController );
+
+                function MyController ($scope) {
+
+                }
+        </script>
+        <!-- END JAVASCRIPT IMPORTS -->
     </body>
 </html>

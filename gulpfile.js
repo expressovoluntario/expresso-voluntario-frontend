@@ -24,12 +24,12 @@ gulp.task('compass', function() {
 */
 gulp.task('watch', function () {
     browserSync({
-        'server' : { 'baseDir' : 'app'}
+        'server' : { 'baseDir' : '.'}
     });
 
     gulp.watch(
-        ['*.html', 'stylesheets/**/*.css', '**/*.js'],
-        { 'cwd' : 'app'},
+        ['*.html', 'app/stylesheets/**/*.css', 'app/**/*.js'],
+        { 'cwd' : '.'},
         browserSyncReload
     );
 
