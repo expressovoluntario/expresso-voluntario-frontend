@@ -16,6 +16,25 @@ angular.module('expresso.components', [
         // Add here the components modules
     ]);
 
+(function (angular) {
+    'use strict';
+
+    var home;
+    home = angular.module('expresso.modules.home', [])
+    home.config(config);
+
+    function config($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("404");
+
+        $stateProvider
+            .state('home', {
+                url: "/",
+                templateUrl: "/app/modules/home/home.html"
+            });
+    }
+
+})(angular);
+
 (function(angular) {
     'use strict';
 
@@ -46,25 +65,6 @@ angular.module('expresso.components', [
             .state('signup', {
                 url: "/signup",
                 templateUrl: "/app/modules/signup/signup.html"
-            });
-    }
-
-})(angular);
-
-(function (angular) {
-    'use strict';
-
-    var home;
-    home = angular.module('expresso.modules.home', [])
-    home.config(config);
-
-    function config($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("404");
-
-        $stateProvider
-            .state('home', {
-                url: "/",
-                templateUrl: "/app/modules/home/home.html"
             });
     }
 
