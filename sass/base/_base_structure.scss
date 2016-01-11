@@ -8,5 +8,16 @@
     width: 100%;
     max-width: $MAX_WIDTH_CONTENT;
     margin: 0 auto;
-    padding: 0 $SPACING_2;
+    padding-left: $SPACING_2;
+    padding-right: $SPACING_2;
+}
+
+.expresso-content,
+.expresso-footer {
+    padding-top: $SPACING_2;
+    padding-bottom: $SPACING_2;
+}
+
+.expresso-footer {
+    height: 200px;
 }

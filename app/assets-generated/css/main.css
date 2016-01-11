@@ -66,7 +66,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.expresso-content,
+.expresso-footer {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.expresso-footer {
+  height: 200px;
 }
 
 html,
