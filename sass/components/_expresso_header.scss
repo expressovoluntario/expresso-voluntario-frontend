@@ -1,3 +1,41 @@
+.expresso-header__wrapper {
+    height: $EXPRESSO_HEADER_HEIGHT;
+    background-color: $COLOR_EXPRESSO_HEADER;
+}
+
 .expresso-header {
-    height: 50px;
+    width: 100%;
+    max-width: $MAX_WIDTH_CONTENT;
+    padding: 0 $SPACING_2;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.expresso-header__logo {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: $EXPRESSO_HEADER_HEIGHT;
+
+    a { color: #fff; }
+}
+
+.expresso-header__menu {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: $EXPRESSO_HEADER_HEIGHT;
+
+    a {
+        color: #fff;
+        display: block;
+        
+        &:hover { color: $COLOR_LINK; }
+    }
+}
+
+.expresso-header__menu-item {
+    height: 100%;
+    margin-left: $SPACING_2;
+    display: inline-block;
 }
