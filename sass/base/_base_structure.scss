@@ -1,3 +1,12 @@
 * {
     @include box-sizing(border-box);
 }
+
+.expresso-header,
+.expresso-content,
+.expresso-footer {
+    width: 100%;
+    max-width: $MAX_WIDTH_CONTENT;
+    margin: 0 auto;
+    padding: 0 $SPACING_2;
+}

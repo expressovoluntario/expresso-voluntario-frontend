@@ -60,6 +60,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
 }
 
+.expresso-header,
+.expresso-content,
+.expresso-footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 html,
 body {
   height: 100%;
@@ -70,13 +79,49 @@ body {
 }
 
 a {
-  color: #FF4081;
+  color: #ff4081;
+  text-decoration: none;
 }
 
 @font-face {
   font-family: 'Roboto';
   src: url("/app/assets/fonts/roboto/Roboto-Regular.ttf") format("truetype");
 }
-.expresso-header {
+.expresso-header__wrapper {
   height: 50px;
+  background-color: #3f51b5;
+}
+
+.expresso-header {
+  color: #fff;
+}
+
+.expresso-header__logo {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 50px;
+}
+.expresso-header__logo a {
+  color: #fff;
+}
+
+.expresso-header__menu {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 50px;
+}
+.expresso-header__menu a {
+  color: #fff;
+  display: block;
+}
+.expresso-header__menu a:hover {
+  color: #ff4081;
+}
+
+.expresso-header__menu-item {
+  height: 100%;
+  margin-left: 16px;
+  display: inline-block;
 }

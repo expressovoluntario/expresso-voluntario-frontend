@@ -13,9 +13,20 @@
         <!-- END CSS IMPORTS -->
     </head>
     <body ng-app="MyApp">
-        <header class="expresso-header">
-            <a ui-sref="home">Home</a>
-            <a ui-sref="signup">Signup</a>
+        <header class="expresso-header__wrapper pure-g">
+            <div class="expresso-header">
+                <div class="pure-u-1-2 expresso-header__logo">
+                    <a ui-sref="home">Expresso Voluntário</a>
+                </div>
+                <div class="pure-u-1-2 expresso-header__menu">
+                    <nav>
+                        <ul class="expresso-header__menu">
+                            <li class="expresso-header__menu-item"><a ui-sref="signup">Cadastre-se</a></li>
+                            <li class="expresso-header__menu-item"><a href="login">Entrar</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </header>
 
         <main class="expresso-content">

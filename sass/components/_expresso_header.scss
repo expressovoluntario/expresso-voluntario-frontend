@@ -4,10 +4,6 @@
 }
 
 .expresso-header {
-    width: 100%;
-    max-width: $MAX_WIDTH_CONTENT;
-    padding: 0 $SPACING_2;
-    margin: 0 auto;
     color: #fff;
 }
 
@@ -29,7 +25,7 @@
     a {
         color: #fff;
         display: block;
-        
+
         &:hover { color: $COLOR_LINK; }
     }
 }
