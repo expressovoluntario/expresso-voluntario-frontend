@@ -8,5 +8,6 @@ body {
 }
 
 a {
-    color: $link-color;
+    color: $COLOR_LINK;
+    text-decoration: none;
 }

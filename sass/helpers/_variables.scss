@@ -1,12 +1,27 @@
-// COLOR PALETTE - MATERIAL DESIGN - INDIGO AND PINK
-$primary-color-dark:   #303F9F;
-$primary-color:        #3F51B5;
-$primary-color-light:  #C5CAE9;
-$primary-color-text:   #FFFFFF;
-$accent-color:         #FF4081;
-$primary-text-color:   #212121;
-$secondary-text-color: #727272;
-$divider-color:        #B6B6B6;
+// COLOR PALETTE - MATERIAL DESIGN (INDIGO AND PINK)
+$PRIMARY_COLOR_DARK:   #303f9f;
+$PRIMARY_COLOR:        #3f51b5;
+$PRIMARY_COLOR_LIGHT:  #c5cae9;
+$PRIMARY_COLOR_TEXT:   #ffffff;
+$ACCENT_COLOR:         #ff4081;
+$PRIMARY_TEXT_COLOR:   #212121;
+$SECONDARY_TEXT_COLOR: #727272;
+$DIVIDER_COLOR:        #b6b6b6;
+
 
 // COLORS VARIABLES BY CONTEXT
-$link-color: $accent-color;
+$COLOR_LINK: $ACCENT_COLOR;
+$COLOR_EXPRESSO_HEADER: $PRIMARY_COLOR;
+
+
+// DIMENSIONS VARIABLES
+$MAX_WIDTH_CONTENT: 1200px;
+$EXPRESSO_HEADER_HEIGHT: 50px;
+
+// SPACING VARIABLES
+$SPACING_1: 8px;
+$SPACING_2: 16px;
+$SPACING_3: 24px;
+$SPACING_4: 32px;
+$SPACING_5: 40px;
+$SPACING_6: 48px;
