@@ -60,11 +60,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+a {
+  color: #FF4081;
 }
 
 @font-face {
   font-family: 'Roboto';
   src: url("/app/assets/fonts/roboto/Roboto-Regular.ttf") format("truetype");
+}
+.expresso-header {
+  height: 50px;
 }
