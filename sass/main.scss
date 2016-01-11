@@ -11,5 +11,8 @@
 @import "base/base_style";
 @import "base/typography";
 
+// COMPONENTS
+@import "components/expresso_header";
+
 // MODULES (PAGES)
 @import "../app/modules/modules";
