@@ -13,31 +13,39 @@
         <!-- END CSS IMPORTS -->
     </head>
     <body ng-app="MyApp">
+        <!-- HEADER -->
         <header class="expresso-header__wrapper pure-g">
-            <div class="expresso-header">
-                <div class="pure-u-1-2 expresso-header__logo">
-                    <a ui-sref="home">Expresso Voluntário</a>
-                </div>
-                <div class="pure-u-1-2 expresso-header__menu">
-                    <nav>
-                        <ul class="expresso-header__menu">
-                            <li class="expresso-header__menu-item"><a ui-sref="signup">Cadastre-se</a></li>
-                            <li class="expresso-header__menu-item"><a href="login">Entrar</a></li>
-                        </ul>
-                    </nav>
+            <div class="expresso-container">
+                <div class="expresso-header">
+                    <div class="pure-u-1-2 expresso-header__logo">
+                        <a ui-sref="home">Expresso Voluntário</a>
+                    </div>
+                    <div class="pure-u-1-2 expresso-header__menu">
+                        <nav>
+                            <ul class="expresso-header__menu">
+                                <li class="expresso-header__menu-item"><a ui-sref="signup">Cadastre-se</a></li>
+                                <li class="expresso-header__menu-item"><a href="login">Entrar</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </header>
+        <!-- END HEADER -->
 
+        <!-- CONTENT -->
         <main class="expresso-content__wrapper">
-            <div ui-view class="expresso-content"></div>
+            <div ui-view style="height: 100%;"></div>
         </main>
+        <!-- END CONTENT -->
 
-        <footer class=expresso-footer__wrapper"">
-            <div class="expresso-footer">
-
+        <!-- FOOTER -->
+        <footer class="expresso-footer__wrapper">
+            <div class="expresso-container is-vertical-spacing">
+                RODAPÉ
             </div>
         </footer>
+        <!-- END FOOTER -->
 
         <!-- JAVASCRIPT IMPORTS -->
             <script src="bower_components/angular/angular.js"></script>

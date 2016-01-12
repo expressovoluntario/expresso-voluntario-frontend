@@ -1,3 +1,20 @@
 .page-home {
+    height: 100%;
 
+    .page-home__tasks,
+    .page-home__cover {
+        height: 100%;
+    }
+
+    .page-home__cover {
+        // @refactoring: as 2 propriedades abaixo são temporárias
+        background-color: #B6B6B6;
+        color: white;
+    }
+
+    .page-home__tasks {
+        // @refactoring: as 2 propriedades abaixo são temporárias
+        background-color: #c5cae9;
+        color: white;
+    }
 }

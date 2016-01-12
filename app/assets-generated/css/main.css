@@ -60,29 +60,34 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
 }
 
-.expresso-header,
-.expresso-content,
-.expresso-footer {
+html,
+body {
+  height: 100%;
+}
+
+.expresso-content__wrapper {
+  height: 100%;
+  margin-top: 50px;
+}
+
+.expresso-footer__wrapper {
+  height: 200px;
+}
+
+.expresso-content {
+  height: 100%;
+}
+
+.expresso-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 16px;
   padding-right: 16px;
 }
-
-.expresso-content,
-.expresso-footer {
+.expresso-container.is-vertical-spacing {
   padding-top: 16px;
   padding-bottom: 16px;
-}
-
-.expresso-footer {
-  height: 200px;
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {
@@ -99,6 +104,10 @@ a {
   src: url("/app/assets/fonts/roboto/Roboto-Regular.ttf") format("truetype");
 }
 .expresso-header__wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   height: 50px;
   background-color: #3f51b5;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -136,4 +145,20 @@ a {
   height: 100%;
   margin-left: 16px;
   display: inline-block;
+}
+
+.page-home {
+  height: 100%;
+}
+.page-home .page-home__tasks,
+.page-home .page-home__cover {
+  height: 100%;
+}
+.page-home .page-home__cover {
+  background-color: #B6B6B6;
+  color: white;
+}
+.page-home .page-home__tasks {
+  background-color: #c5cae9;
+  color: white;
 }

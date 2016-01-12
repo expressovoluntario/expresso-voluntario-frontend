@@ -2,22 +2,33 @@
     @include box-sizing(border-box);
 }
 
-.expresso-header,
-.expresso-content,
-.expresso-footer {
+html,
+body {
+    height: 100%;
+}
+
+.expresso-content__wrapper {
+    height: 100%;
+    margin-top: $EXPRESSO_HEADER_HEIGHT;
+}
+
+.expresso-footer__wrapper {
+    height: 200px;
+}
+
+.expresso-content {
+    height: 100%;
+}
+
+.expresso-container {
     width: 100%;
     max-width: $MAX_WIDTH_CONTENT;
     margin: 0 auto;
     padding-left: $SPACING_2;
     padding-right: $SPACING_2;
-}
 
-.expresso-content,
-.expresso-footer {
-    padding-top: $SPACING_2;
-    padding-bottom: $SPACING_2;
-}
-
-.expresso-footer {
-    height: 200px;
+    &.is-vertical-spacing {
+        padding-top: $SPACING_2;
+        padding-bottom: $SPACING_2;
+    }
 }
