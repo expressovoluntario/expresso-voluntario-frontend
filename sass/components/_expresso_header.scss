@@ -1,4 +1,8 @@
 .expresso-header__wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     height: $EXPRESSO_HEADER_HEIGHT;
     background-color: $COLOR_EXPRESSO_HEADER;
     @include m-box-shadow(1);
