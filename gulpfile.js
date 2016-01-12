@@ -42,7 +42,7 @@ gulp.task('watch', function () {
 
     gulp.watch(['*.html', 'app/assets/css/*.css'], { 'cwd' : '.'}, browserSyncReload);
     gulp.watch('app/**/*.js', ['js-concat', browserSyncReload]);
-    gulp.watch('sass/**/*.scss', ['compass']);
+    gulp.watch(['sass/**/*.scss', 'app/**/*.scss'], ['compass']);
 });
 
 
