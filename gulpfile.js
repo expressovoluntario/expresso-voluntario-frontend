@@ -31,6 +31,13 @@ gulp.task('js-concat', function() {
 
 
 /*
+    * ## TASK build
+    * Compila o compass e concatena os javascripts
+*/
+gulp.task('build', ['compass', 'js-concat']);
+
+
+/*
     * ## TASK watch
     * Sobe um servidor para a aplicação e recarrega o browser após
     * alterações (scss, css, html, js)
@@ -50,6 +57,4 @@ gulp.task('watch', function () {
     * ## TASK default
     * Executa quando acionado apenas "gulp" no terminal
 */
-gulp.task('default', function () {
-
-});
+gulp.task('default', ['build', 'watch']);
