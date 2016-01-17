@@ -36,3 +36,12 @@
   -moz-border-radius: $size/2;
   border-radius: $size/2;
 }
+
+// Mixin to center an element verticaly
+@mixin vertical-align($top: 50%, $translate: 50%) {
+  position: relative;
+  top: $top;
+  -webkit-transform: translateY($translate);
+  -ms-transform: translateY($translate);
+  transform: translateY($translate);
+}
