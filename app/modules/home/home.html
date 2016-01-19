@@ -5,7 +5,15 @@
                 <iframe src="https://player.vimeo.com/video/151567576?title=0&byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <div class="pure-u-1 pure-u-md-1-2">
-                TEXTO E FORM DE CADASTRO
+                <form ng-submit="sendForm()">
+                    <label for="radio1">E-mail</label>
+                    <input ng-model="email" type="text" name="email" required="true">
+                    <input ng-model="interest" type="radio" name="interesse" value="ong" id="radio1" required="true">
+                    <label for="radio1">ONG</label>
+                    <input ng-model="interest" type="radio" name="interesse" value="voluntario" id="radio2" required="true">
+                    <label for="radio2">Voluntário</label>
+                    <button type="submit">Cadastrar</button>
+                </form>
             </div>
         </div>
     </section>
