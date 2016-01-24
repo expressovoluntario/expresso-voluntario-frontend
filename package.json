@@ -1,0 +1,26 @@
+{
+  "name": "expresso-voluntario-frontend",
+  "version": "1.0.0",
+  "description": "Front-end do site Expresso Voluntário",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.11.0",
+    "gulp-compass": "^2.1.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expressovoluntario/expresso-voluntario-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/expressovoluntario/expresso-voluntario-frontend/issues"
+  },
+  "homepage": "https://github.com/expressovoluntario/expresso-voluntario-frontend#readme"
+}
