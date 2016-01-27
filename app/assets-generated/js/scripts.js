@@ -10,6 +10,13 @@
         'expresso.modules'
     ]);
 
+    // Configura a paleta de cores do angular material
+    expresso.config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+            .accentPalette('pink');
+    });
+
 })(angular);
 
 angular.module('expresso.components', [
@@ -42,22 +49,6 @@ angular.module('expresso.components', [
 })(angular);
 
 (function(angular) {
-    'use strict';
-
-    var sharedTemplates;
-    sharedTemplates = angular.module('expresso.modules.sharedTemplates', []);
-    sharedTemplates.config(config);
-
-    function config($stateProvider, $urlRouterProvider) {
-        $stateProvider
-            .state('404', {
-                url: "/404",
-                templateUrl: "/app/modules/sharedTemplates/404.html"
-            });
-    }
-})(angular);
-
-(function(angular) {
     'use strict'
 
     var login;
@@ -74,6 +65,22 @@ angular.module('expresso.components', [
             });
     }
 
+})(angular);
+
+(function(angular) {
+    'use strict';
+
+    var sharedTemplates;
+    sharedTemplates = angular.module('expresso.modules.sharedTemplates', []);
+    sharedTemplates.config(config);
+
+    function config($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('404', {
+                url: "/404",
+                templateUrl: "/app/modules/sharedTemplates/404.html"
+            });
+    }
 })(angular);
 
 (function(angular) {
@@ -104,10 +111,15 @@ angular.module('expresso.components', [
     home.controller('HomeCtrl', HomeCtrl);
 
     function HomeCtrl($scope, $http) {
+        // init variables
         $scope.email;
         $scope.interest;
         $scope.messageFeedback;
+        $scope.formState = 'new';
+
+        // init functions
         $scope.sendForm = sendForm;
+        $scope.setFormState = setFormState;
 
         function sendForm() {
             var params;
@@ -116,10 +128,20 @@ angular.module('expresso.components', [
                 'interesse' : $scope.interest
             };
 
-           $http.post("https://sheetsu.com/apis/d009a995", params)
+            $scope.formState = 'loading';
+            $http.post("https://sheetsu.com/apis/d009a995", params)
                 .success(function(data, status) {
                     console.log(data);
+                    $scope.formState = 'success';
+                })
+                .error(function(data, status) {
+                    console.log(data)
+                    $scope.formState = 'error';
                 });
+        }
+
+        function setFormState(state) {
+            $scope.formState = state;
         }
 
     }

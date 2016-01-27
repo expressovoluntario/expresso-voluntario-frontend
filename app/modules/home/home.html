@@ -2,25 +2,64 @@
     <section class="pure-g page-home__cover">
         <div class="expresso-container is-vertical-spacing">
             <div class="pure-u-1 pure-u-md-1-2">
-                <iframe src="https://player.vimeo.com/video/151567576?title=0&byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <div class="page-home__video-side">
+                    <iframe src="https://player.vimeo.com/video/152907862?title=0&byline=0&portrait=0" width="100%" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
             </div>
             <div class="pure-u-1 pure-u-md-1-2">
-                <form ng-submit="sendForm()">
-                    <label for="radio1">E-mail</label>
-                    <input ng-model="email" type="text" name="email" required="true">
-                    <input ng-model="interest" type="radio" name="interesse" value="ong" id="radio1" required="true">
-                    <label for="radio1">ONG</label>
-                    <input ng-model="interest" type="radio" name="interesse" value="voluntario" id="radio2" required="true">
-                    <label for="radio2">Voluntário</label>
-                    <button type="submit">Cadastrar</button>
-                </form>
+                <div class="page-home__form-side">
+                    <p class="page-home__description">
+                        O Expresso Voluntário procura ajudar a eliminar os obstáculos que existem
+                        entre as pessoas que tem o desejo de ajudar e as ONG's que precisam de ajuda.
+                        Assista o vídeo e entenda melhor como funciona.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="page-home__tasks">
+    <section class="page-home__tasks" style="border-top: 2px solid #e6e6e6">
         <div class="expresso-container is-vertical-spacing">
-            SECÃO DE PESQUISA DE TASKS
+            <form ng-submit="sendForm()" class="page-home__form-wrapper">
+                <div ng-show="formState === 'new'">
+                    <p class="page-home__description-smaller">
+                        Quer acompanhar as novidades do Expresso Voluntário?
+                    </p>
+                    <p class="page-home__description-smaller">
+                        Cadastre seu e-mail pelo formulário abaixo.
+                    </p>
+                    <div class="u-margin-bottom-2">
+                        <label class="label-control">E-mail:</label>
+                        <input ng-model="email" type="text" name="email" required="true">
+                    </div>
+                    <div class="u-margin-bottom-3">
+                        <label class="label-control">Eu sou:</label>
+                        <input ng-model="interest" type="radio" name="interesse" value="voluntario" id="radio2" required="true">
+                        <label for="radio2">Voluntário</label>
+                        <input ng-model="interest" type="radio" name="interesse" value="instituicao" id="radio1" required="true">
+                        <label for="radio1">Instituição</label>
+                    </div>
+                    <div>
+                        <md-button class="md-primary md-raised u-no-margin" type="submit">Cadastrar</md-button>
+                    </div>
+                </div>
+
+                <div ng-show="formState === 'loading'">
+                    Cadastrando...
+                </div>
+
+                <div ng-show="formState === 'success'">
+                    Sucesso! Agora é só aguardar as novidades! =)
+                </div>
+
+                <div ng-show="formState === 'error'">
+                    <p class="u-margin-bottom-1">Houve um problema ao cadastrar seu e-mail =(</p>
+                    <p ng-click="setFormState('new')">
+                        Por favor,
+                        <a href="">tente novamente clicando aqui.</a>
+                    </p>
+                </div>
+            </form>
         </div>
     </section>
 </div>

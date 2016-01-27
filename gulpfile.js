@@ -47,7 +47,7 @@ gulp.task('watch', function () {
         'server' : { 'baseDir' : '.'}
     });
 
-    gulp.watch(['*.html', 'app/assets/css/*.css'], { 'cwd' : '.'}, browserSyncReload);
+    gulp.watch(['app/**/*.html', 'app/assets/css/*.css'], { 'cwd' : '.'}, browserSyncReload);
     gulp.watch('app/**/*.js', ['js-concat', browserSyncReload]);
     gulp.watch(['sass/**/*.scss', 'app/**/*.scss'], ['compass']);
 });

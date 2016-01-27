@@ -8,11 +8,80 @@
 
     .page-home__cover {
         // @refactoring: as 2 propriedades abaixo são temporárias
-        background-color: #fff;
+        // background-color: #f6f8fa;
     }
 
     .page-home__tasks {
         // @refactoring: as 2 propriedades abaixo são temporárias
         background-color: #B6B6B6;
+    }
+
+    .page-home__video-side,
+    .page-home__form-side {
+        padding-top: $SPACING_6;
+    }
+
+    .page-home__video-side {
+        padding-right: $SPACING_3;
+    }
+
+    .page-home__form-side {
+        padding-left: $SPACING_3;
+    }
+
+    .page-home__form-wrapper {
+        padding: $SPACING_2;
+        margin: 0 auto;
+        max-width: 520px;
+        border: 1px solid #e6e6e6;
+        background-color: #fff;
+        @include border-radius(3px);
+        @include m-box-shadow(1);
+    }
+
+    .page-home__description {
+        font-size: 20px;
+        line-height: 1.5;
+        text-align: center;
+        margin-bottom: $SPACING_6;
+    }
+
+    .page-home__description-smaller {
+        font-size: 14px;
+        margin-bottom: 4px;
+
+        &:last-of-type {
+            margin-bottom: $SPACING_3;
+        }
+    }
+
+    .label-control {
+        display: block;
+    }
+
+    input[type="text"] {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+    }
+
+    .label-control {
+        display: block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
     }
 }
