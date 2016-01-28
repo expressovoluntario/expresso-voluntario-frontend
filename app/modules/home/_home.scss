@@ -7,13 +7,11 @@
     }
 
     .page-home__cover {
-        // @refactoring: as 2 propriedades abaixo são temporárias
-        // background-color: #f6f8fa;
+        background-color: $PRIMARY_COLOR;
     }
 
     .page-home__tasks {
-        // @refactoring: as 2 propriedades abaixo são temporárias
-        background-color: #B6B6B6;
+        background-color: #fff;
     }
 
     .page-home__video-side,
@@ -33,13 +31,14 @@
         padding: $SPACING_2;
         margin: 0 auto;
         max-width: 520px;
-        border: 1px solid #e6e6e6;
+        border: 1px solid $DIVIDER_COLOR;
         background-color: #fff;
         @include border-radius(3px);
         @include m-box-shadow(1);
     }
 
     .page-home__description {
+        color: $PRIMARY_COLOR_TEXT;
         font-size: 20px;
         line-height: 1.5;
         text-align: center;

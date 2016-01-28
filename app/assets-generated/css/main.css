@@ -408,7 +408,7 @@ a {
   right: 0;
   top: 0;
   height: 50px;
-  background-color: #3f51b5;
+  background-color: #303f9f;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -453,8 +453,11 @@ a {
 .page-home .page-home__cover {
   min-height: 600px;
 }
+.page-home .page-home__cover {
+  background-color: #3f51b5;
+}
 .page-home .page-home__tasks {
-  background-color: #B6B6B6;
+  background-color: #fff;
 }
 .page-home .page-home__video-side,
 .page-home .page-home__form-side {
@@ -470,7 +473,7 @@ a {
   padding: 16px;
   margin: 0 auto;
   max-width: 520px;
-  border: 1px solid #e6e6e6;
+  border: 1px solid #b6b6b6;
   background-color: #fff;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -478,6 +481,7 @@ a {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 .page-home .page-home__description {
+  color: #ffffff;
   font-size: 20px;
   line-height: 1.5;
   text-align: center;
