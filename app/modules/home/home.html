@@ -60,13 +60,11 @@
     <section class="page-home__tasks" style="border-top: 2px solid #e6e6e6">
         <div class="expresso-container is-vertical-spacing">
             <p class="page-home__form-title">Quer acompanhar as novidades do Expresso Voluntário?</p>
+            <p class="u-margin-bottom-4">Cadastre seu e-mail pelo formulário abaixo:</p>
 
             <form ng-submit="sendForm()" class="page-home__form-wrapper">
                 <div ng-show="formState === 'new'">
-                    <p class="u-margin-bottom-3">
-                        Cadastre seu e-mail pelo formulário abaixo:
-                    </p>
-                    <div class="u-margin-bottom-2">
+                    <div class="u-margin-bottom-2 u-margin-top-1">
                         <label class="label-control">E-mail:</label>
                         <input ng-model="email" type="text" name="email" required="true">
                     </div>
