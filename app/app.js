@@ -22,10 +22,6 @@
         AnalyticsProvider
             .setAccount('UA-67297111-2')
             .setPageEvent('$stateChangeSuccess');
-
-            // .logAllCalls(true)
-            // .startOffline(true);
-
     });
 
     expresso.run(function(Analytics) {});
