@@ -467,11 +467,15 @@ b {
 .page-home .page-home__description-side {
   padding-top: 48px;
 }
-.page-home .page-home__video-side {
-  padding-right: 24px;
+@media (min-width: 768px) {
+  .page-home .page-home__video-side {
+    padding-right: 24px;
+  }
 }
-.page-home .page-home__description-side {
-  padding-left: 24px;
+@media (min-width: 768px) {
+  .page-home .page-home__description-side {
+    padding-left: 24px;
+  }
 }
 .page-home .page-home__description-wrapper {
   margin-bottom: 48px;
@@ -485,6 +489,7 @@ b {
 .page-home .page-home__description-paragraph {
   margin-bottom: 8px;
   color: #ffffff;
+  text-align: justify;
   line-height: 1.5;
 }
 .page-home .page-home__form-wrapper {

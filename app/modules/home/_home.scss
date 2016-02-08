@@ -20,11 +20,15 @@
     }
 
     .page-home__video-side {
-        padding-right: $SPACING_3;
+        @media (min-width: 768px) {
+            padding-right: $SPACING_3;
+        }
     }
 
     .page-home__description-side {
-        padding-left: $SPACING_3;
+        @media (min-width: 768px) {
+            padding-left: $SPACING_3;
+        }
     }
 
     .page-home__description-wrapper {
@@ -41,6 +45,7 @@
     .page-home__description-paragraph {
         margin-bottom: $SPACING_1;
         color: $PRIMARY_COLOR_TEXT;
+        text-align: justify;
         line-height: 1.5;
     }
 
