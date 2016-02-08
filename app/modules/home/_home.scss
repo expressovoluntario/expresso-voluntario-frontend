@@ -15,7 +15,7 @@
     }
 
     .page-home__video-side,
-    .page-home__form-side {
+    .page-home__description-side {
         padding-top: $SPACING_6;
     }
 
@@ -23,36 +23,43 @@
         padding-right: $SPACING_3;
     }
 
-    .page-home__form-side {
+    .page-home__description-side {
         padding-left: $SPACING_3;
+    }
+
+    .page-home__description-wrapper {
+        margin-bottom: $SPACING_6;
+    }
+
+    .page-home__description-title {
+        margin-bottom: $SPACING_1;
+        font-size: 20px;
+        font-weight: bold;
+        color: $ACCENT_COLOR;
+    }
+
+    .page-home__description-paragraph {
+        margin-bottom: $SPACING_1;
+        color: $PRIMARY_COLOR_TEXT;
+        line-height: 1.5;
     }
 
     .page-home__form-wrapper {
         padding: $SPACING_2;
-        margin: 0 auto;
-        max-width: 520px;
+        max-width: 700px;
         border: 1px solid $DIVIDER_COLOR;
         background-color: #fff;
         @include border-radius(3px);
         @include m-box-shadow(1);
     }
 
-    .page-home__description {
-        color: $PRIMARY_COLOR_TEXT;
-        font-size: 20px;
-        line-height: 1.5;
-        text-align: center;
-        margin-bottom: $SPACING_6;
+    .page-home__form-title {
+        margin-top: $SPACING_3;
+        margin-bottom: $SPACING_4;
+        color: $PRIMARY_TEXT_COLOR;
+        font-size: 24px;
     }
 
-    .page-home__description-smaller {
-        font-size: 14px;
-        margin-bottom: 4px;
-
-        &:last-of-type {
-            margin-bottom: $SPACING_3;
-        }
-    }
 
     .label-control {
         display: block;

@@ -7,12 +7,51 @@
                 </div>
             </div>
             <div class="pure-u-1 pure-u-md-1-2">
-                <div class="page-home__form-side">
-                    <p class="page-home__description">
-                        O Expresso Voluntário procura ajudar a eliminar os obstáculos que existem
-                        entre as pessoas que tem o desejo de ajudar e as ONG's que precisam de ajuda.
-                        Assista o vídeo e entenda melhor como funciona.
-                    </p>
+                <div class="page-home__description-side">
+                    <div class="page-home__description-wrapper">
+                        <h2 class="page-home__description-title">O que é o Expresso Voluntário?</h2>
+                        <p class="page-home__description-paragraph">
+                            O Expresso Voluntário é uma plataforma que tenta unir voluntários a ONG's.
+                        </p>
+                        <p class="page-home__description-paragraph">
+                            O objetivo é remover alguns obstáculos que existem entre as pessoas que tem o desejo de ajudar e as ONG's que precisam de ajuda.
+                        </p>
+                    </div>
+
+                    <div class="page-home__description-wrapper">
+                        <h2 class="page-home__description-title">Como funciona?</h2>
+                        <p class="page-home__description-paragraph">
+                            As ONGs cadastram <b>tarefas</b> na plataforma, e essas tarefas ficam disponíveis no perfil de cada ONG.
+                        </p>
+                        <p class="page-home__description-paragraph">
+                            O voluntário pode visualizar essas tarefas, analisar com qual ele mais se identifica e se oferecer para realizá-la.
+                        </p>
+                        <p class="page-home__description-paragraph">
+                            O voluntário consegue, por exemplo, <b>buscar tarefas por habilidades, localidade e causas </b> das ONG's.
+                        </p>
+                    </div>
+
+                    <!-- <div class="page-home__description-wrapper">
+                        <h2 class="page-home__description-title">O que tem de interessante nisso?</h2>
+                        <p class="page-home__description-paragraph">
+                            O voluntário pode pesquisar tarefas de acordo com o perfil dele.
+                        </p>
+                        <p class="page-home__description-paragraph">
+                            Ele consegue facilmente responder perguntas que geralmente surgem de quem já teve vontade de ajudar uma instituição como:
+                            <b>"Onde eu poderia ajudar"</b> ou <b>"Como eu poderia ajudar"</b>?
+                        </p>
+                    </div> -->
+
+                    <div class="page-home__description-wrapper">
+                        <h2 class="page-home__description-title">Legal, como posso ver as tarefas ou me cadastrar?</h2>
+                        <p class="page-home__description-paragraph">
+                            O Expresso Voluntário ainda não está totalmente finalizado, mas estará em breve!
+                        </p>
+                        <p class="page-home__description-paragraph">
+                            Você pode acompanhar o andamento da plataforma por e-mail se cadastrando pelo formulário abaixo.
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -20,13 +59,12 @@
 
     <section class="page-home__tasks" style="border-top: 2px solid #e6e6e6">
         <div class="expresso-container is-vertical-spacing">
+            <p class="page-home__form-title">Quer acompanhar as novidades do Expresso Voluntário?</p>
+
             <form ng-submit="sendForm()" class="page-home__form-wrapper">
                 <div ng-show="formState === 'new'">
-                    <p class="page-home__description-smaller">
-                        Quer acompanhar as novidades do Expresso Voluntário?
-                    </p>
-                    <p class="page-home__description-smaller">
-                        Cadastre seu e-mail pelo formulário abaixo.
+                    <p class="u-margin-bottom-3">
+                        Cadastre seu e-mail pelo formulário abaixo:
                     </p>
                     <div class="u-margin-bottom-2">
                         <label class="label-control">E-mail:</label>
