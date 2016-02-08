@@ -394,8 +394,12 @@ body {
 }
 
 a {
-  color: #ff4081;
+  color: #ffc107;
   text-decoration: none;
+}
+
+b {
+  font-weight: bold;
 }
 
 @font-face {
@@ -408,7 +412,7 @@ a {
   right: 0;
   top: 0;
   height: 50px;
-  background-color: #303f9f;
+  background-color: #1976d2;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
@@ -437,7 +441,7 @@ a {
   display: block;
 }
 .expresso-header__menu a:hover {
-  color: #ff4081;
+  color: #ffc107;
 }
 
 .expresso-header__menu-item {
@@ -454,25 +458,38 @@ a {
   min-height: 600px;
 }
 .page-home .page-home__cover {
-  background-color: #3f51b5;
+  background-color: #2196f3;
 }
 .page-home .page-home__tasks {
   background-color: #fff;
 }
 .page-home .page-home__video-side,
-.page-home .page-home__form-side {
+.page-home .page-home__description-side {
   padding-top: 48px;
 }
 .page-home .page-home__video-side {
   padding-right: 24px;
 }
-.page-home .page-home__form-side {
+.page-home .page-home__description-side {
   padding-left: 24px;
+}
+.page-home .page-home__description-wrapper {
+  margin-bottom: 48px;
+}
+.page-home .page-home__description-title {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffc107;
+}
+.page-home .page-home__description-paragraph {
+  margin-bottom: 8px;
+  color: #ffffff;
+  line-height: 1.5;
 }
 .page-home .page-home__form-wrapper {
   padding: 16px;
-  margin: 0 auto;
-  max-width: 520px;
+  max-width: 700px;
   border: 1px solid #b6b6b6;
   background-color: #fff;
   -moz-border-radius: 3px;
@@ -480,19 +497,11 @@ a {
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-.page-home .page-home__description {
-  color: #ffffff;
-  font-size: 20px;
-  line-height: 1.5;
-  text-align: center;
-  margin-bottom: 48px;
-}
-.page-home .page-home__description-smaller {
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-.page-home .page-home__description-smaller:last-of-type {
-  margin-bottom: 24px;
+.page-home .page-home__form-title {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  color: #212121;
+  font-size: 24px;
 }
 .page-home .label-control {
   display: block;

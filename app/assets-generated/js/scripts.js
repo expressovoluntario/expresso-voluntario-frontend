@@ -13,8 +13,8 @@
     // Configura a paleta de cores do angular material
     expresso.config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
-            .primaryPalette('indigo')
-            .accentPalette('pink');
+            .primaryPalette('blue')
+            .accentPalette('amber');
     });
 
 })(angular);
