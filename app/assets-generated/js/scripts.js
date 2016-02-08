@@ -5,17 +5,30 @@
     expresso = angular.module('MyApp', [
         'ui.router',
         'ngMaterial',
+        'angular-google-analytics',
 
         'expresso.components',
         'expresso.modules'
     ]);
 
-    // Configura a paleta de cores do angular material
-    expresso.config(function($mdThemingProvider) {
+    expresso.config(function($mdThemingProvider, AnalyticsProvider) {
+
+        // Configura a paleta de cores do angular material
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('amber');
+
+        // Configura o Google Analytics
+        AnalyticsProvider
+            .setAccount('UA-67297111-2')
+            .setPageEvent('$stateChangeSuccess');
+
+            // .logAllCalls(true)
+            // .startOffline(true);
+
     });
+
+    expresso.run(function(Analytics) {});
 
 })(angular);
 
