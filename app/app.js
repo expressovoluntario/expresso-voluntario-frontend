@@ -13,7 +13,10 @@
         'expresso.modules'
     ]);
 
-    expresso.config(function($mdThemingProvider, $httpProvider, AnalyticsProvider) {
+    expresso.config(function($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+
+        // dont remove trailing slashes from urls
+        $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
         $mdThemingProvider.theme('default')
