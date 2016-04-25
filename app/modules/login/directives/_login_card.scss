@@ -1,0 +1,29 @@
+.login-card {
+    max-width: 400px;
+    margin: $SPACING_3 auto;
+    padding: $SPACING_2;
+
+    @include border-radius(3px);
+    @include m-box-shadow(1);
+    background-color: #fff;
+    text-align: center;
+}
+
+.login-card__header {
+    font-size: 18px;
+}
+
+.login-card__section {
+    padding-top: $SPACING_3;
+}
+
+.login-card__hint {
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    color: #808080;
+}

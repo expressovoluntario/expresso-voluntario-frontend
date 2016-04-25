@@ -1,0 +1,11 @@
+// IMPORT DIRECTIVES FROM THIS MODULE (LOGIN)
+@import 'directives/login_card';
+
+
+.page-login,
+.page-signup,
+.page-new-password,
+.page-recovery-password {
+    height: 100%;
+    background-color: $PRIMARY_COLOR;
+}

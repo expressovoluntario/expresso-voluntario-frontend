@@ -20,7 +20,8 @@
     "angular-material": "~1.0.1",
     "pure": "~0.6.0",
     "angular-ui-router": "~0.2.15",
-    "angular-google-analytics": "~1.1.6"
+    "angular-google-analytics": "~1.1.6",
+    "lodash": "~4.11.1"
   },
   "resolutions": {
     "angular": "1.5.0"

@@ -366,6 +366,7 @@ body {
 }
 
 .expresso-content__wrapper {
+  height: 100%;
   margin-top: 50px;
 }
 
@@ -534,4 +535,43 @@ b {
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: 700;
+}
+
+.login-card {
+  max-width: 400px;
+  margin: 24px auto;
+  padding: 16px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+  text-align: center;
+}
+
+.login-card__header {
+  font-size: 18px;
+}
+
+.login-card__section {
+  padding-top: 24px;
+}
+
+.login-card__hint {
+  position: absolute;
+  left: 2px;
+  right: auto;
+  bottom: 7px;
+  font-size: 12px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  color: #808080;
+}
+
+.page-login,
+.page-signup,
+.page-new-password,
+.page-recovery-password {
+  height: 100%;
+  background-color: #2196f3;
 }

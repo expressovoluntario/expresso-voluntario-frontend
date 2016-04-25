@@ -1,0 +1,147 @@
+<form class="login-card" name="loginForm" ng-submit="controller.submitFormLogin()">
+
+    <!-- HEADER -->
+    <header class="login-card__header">
+        <h2 ng-if="controller.isSectionVisible('login')">Login</h2>
+        <h2 ng-if="controller.isSectionVisible('signup')">Criar uma conta</h2>
+        <h2 ng-if="controller.isSectionVisible('recovery-password')">Recuperar senha</h2>
+        <h2 ng-if="controller.isSectionVisible('new-password')">Cadastrar nova senha</h2>
+    </header>
+
+    <!-- LOGIN -->
+    <article ng-if="controller.isSectionVisible('login')" class="login-card__section">
+        <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input type="email" name="email" ng-model="controller.email" required>
+            <div ng-messages="loginForm.email.$error">
+                <div ng-message="required">
+                  Este campo é obrigatório
+                </div>
+                <div ng-message="email">
+                  Este formato de e-mail não parece ser válido, esqueceu alguma coisa?
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Senha</label>
+            <input type="password" name="password" ng-model="controller.password" minlength="6" required>
+            <div ng-messages="loginForm.password.$error">
+                <div ng-message="required">
+                    Este campo é obrigatório
+                </div>
+                <div ng-message="minlength">
+                    A senha deve conter pelo menos 6 caracteres
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button class="md-raised md-primary">Entrar</md-button>
+        </md-input-container>
+    </article>
+
+    <!-- SIGNUP -->
+    <article ng-if="controller.isSectionVisible('signup')" class="login-card__section">
+        <md-input-container class="md-block">
+            <label>Nome da ONG*</label>
+            <input type="text" name="ong" ng-model="controller.ong" required>
+            <div ng-messages="loginForm.ong.$error">
+                <div ng-message="required">
+                  Este campo é obrigatório
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>E-mail*</label>
+            <input type="email" name="email" ng-model="controller.email" required>
+            <div ng-messages="loginForm.email.$error">
+                <div ng-message="required">
+                  Este campo é obrigatório
+                </div>
+                <div ng-message="email">
+                  Este formato de e-mail não parece ser válido, esqueceu alguma coisa?
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Senha*</label>
+            <input type="password" name="password" ng-model="controller.password" minlength="6" required>
+            <div class="login-card__hint">
+                (A senha deve conter pelo menos 6 caracteres)
+            </div>
+            <div ng-messages="loginForm.password.$error">
+                <div ng-message="required">
+                    Este campo é obrigatório
+                </div>
+                <div ng-message="minlength">
+                    A senha deve conter pelo menos 6 caracteres
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirmação de senha*</label>
+            <input type="password" name="confirmPassword" ng-model="controller.confirmPassword" minlength="6" required>
+            <div ng-messages="loginForm.confirmPassword.$error">
+                <div ng-message="required">
+                    Este campo é obrigatório
+                </div>
+                <div ng-message="minlength">
+                    A senha deve conter pelo menos 6 caracteres
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button class="md-primary md-raised" type="submit">Continuar</md-button>
+        </md-input-container>
+    </article>
+
+    <!-- RECOVERY PASSWORD -->
+    <article ng-if="controller.isSectionVisible('recovery-password')" class="login-card__section">
+        <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input type="email" name="email" ng-model="controller.email" required>
+            <div ng-messages="loginForm.email.$error">
+                <div ng-message="required">
+                  Este campo é obrigatório
+                </div>
+                <div ng-message="email">
+                  Este formato de e-mail não parece ser válido, esqueceu alguma coisa?
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button class="md-raised md-primary">Continuar</md-button>
+        </md-input-container>
+    </article>
+
+    <!-- NEW PASSWORD -->
+    <article ng-if="controller.isSectionVisible('new-password')" class="login-card__section">
+        <md-input-container class="md-block">
+            <label>Senha</label>
+            <input type="password" name="password" ng-model="controller.password" minlength="6" required>
+            <div class="hint">A senha deve conter pelo menos 6 caracteres</div>
+            <div ng-messages="loginForm.password.$error">
+                <div ng-message="required">
+                    Este campo é obrigatório
+                </div>
+                <div ng-message="minlength">
+                    A senha deve conter pelo menos 6 caracteres
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirmação de senha</label>
+            <input type="password" name="confirmPassword" ng-model="controller.confirmPassword" minlength="6" required>
+            <div ng-messages="loginForm.confirmPassword.$error">
+                <div ng-message="required">
+                    Este campo é obrigatório
+                </div>
+                <div ng-message="minlength">
+                    A senha deve conter pelo menos 6 caracteres
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <md-button class="md-raised md-primary">Confirmar alteração</md-button>
+        </md-input-container>
+    </article>
+</form>
