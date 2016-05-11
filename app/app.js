@@ -23,14 +23,6 @@
             .primaryPalette('blue')
             .accentPalette('amber');
 
-        // Configura o $httpProvider (para o CORS funfar)
-        $httpProvider.defaults.headers.common = {};
-        $httpProvider.defaults.headers.post = {};
-        $httpProvider.defaults.headers.put = {};
-        $httpProvider.defaults.headers.patch = {};
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
         // Configura o Google Analytics
         AnalyticsProvider
             .setAccount('UA-67297111-2')

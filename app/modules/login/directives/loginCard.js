@@ -42,15 +42,19 @@
                 isEmailAvailable = _isEmailAvailble(controller.email);
 
                 if (isPasswordValid && isEmailAvailable) {
-                    controller.ongResource.email = controller.email;
+                    controller.ongResource.name = controller.ong;
                     controller.ongResource.$save().then(function(){
-                        console.log('salvou porra :D');
+                        // salvar usuário
                     });
                 }
             }
             else if (path === '/login') {
 
             }
+        }
+
+        function saveFirstUser() {
+
         }
 
         // Retorna se a seção (login, signup...) deve estar visível

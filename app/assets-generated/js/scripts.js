@@ -274,9 +274,7 @@ angular.module('expresso.components', [
                 if (isPasswordValid && isEmailAvailable) {
                     controller.ongResource.name = controller.ong;
                     controller.ongResource.$save().then(function(){
-                        console.log('salvou porra :D');
                         // salvar usuário
-                        // controller.ongResource.email = controller.email;
                     });
                 }
             }
