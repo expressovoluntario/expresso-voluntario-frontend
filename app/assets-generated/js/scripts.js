@@ -13,20 +13,15 @@
         'expresso.modules'
     ]);
 
-    expresso.config(function($mdThemingProvider, $httpProvider, AnalyticsProvider) {
+    expresso.config(function($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+
+        // dont remove trailing slashes from urls
+        $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('amber');
-
-        // Configura o $httpProvider (para o CORS funfar)
-        $httpProvider.defaults.headers.common = {};
-        $httpProvider.defaults.headers.post = {};
-        $httpProvider.defaults.headers.put = {};
-        $httpProvider.defaults.headers.patch = {};
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         // Configura o Google Analytics
         AnalyticsProvider
@@ -117,7 +112,13 @@ angular.module('expresso.components', [
         .config(config);
 
         function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
 
+            $stateProvider
+                .state('profile', {
+                    url: "/profile",
+                    templateUrl: "/app/modules/ong/list/list.html"
+                });
         }
 
 })(angular);
@@ -271,15 +272,21 @@ angular.module('expresso.components', [
                 isEmailAvailable = _isEmailAvailble(controller.email);
 
                 if (isPasswordValid && isEmailAvailable) {
-                    controller.ongResource.email = controller.email;
+                    controller.ongResource.name = controller.ong;
                     controller.ongResource.$save().then(function(){
                         console.log('salvou porra :D');
+                        // salvar usuário
+                        // controller.ongResource.email = controller.email;
                     });
                 }
             }
             else if (path === '/login') {
 
             }
+        }
+
+        function saveFirstUser() {
+
         }
 
         // Retorna se a seção (login, signup...) deve estar visível

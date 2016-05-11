@@ -575,3 +575,35 @@ b {
   height: 100%;
   background-color: #2196f3;
 }
+
+.ong-profile__contact-wrapper {
+  margin-top: 24px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.ong-profile__logo {
+  text-align: center;
+}
+.ong-profile__logo .md-48 {
+  color: #727272;
+  font-size: 48px;
+}
+
+.ong-profile__contact-name {
+  color: #212121;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.ong-profile__contact-info {
+  font-size: 14px;
+  line-height: 1.2;
+}
+.ong-profile__contact-info .material-icons.md-18 {
+  color: #727272;
+  font-size: 18px;
+  margin-right: 4px;
+}

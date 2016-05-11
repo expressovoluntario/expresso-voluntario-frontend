@@ -6,7 +6,13 @@
         .config(config);
 
         function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
 
+            $stateProvider
+                .state('profile', {
+                    url: "/profile",
+                    templateUrl: "/app/modules/ong/list/list.html"
+                });
         }
 
 })(angular);

@@ -1,0 +1,37 @@
+.ong-profile__contact-wrapper {
+    margin-top: $SPACING_3;
+    padding: $SPACING_1;
+    background-color: #fff;
+    border-radius: 3px;
+    @include m-box-shadow(1);
+}
+
+.ong-profile__logo {
+    text-align: center;
+
+    .md-48 {
+        color: $SECONDARY_TEXT_COLOR;
+        font-size: 48px;
+    }
+}
+
+.ong-profile__contact {
+
+}
+
+.ong-profile__contact-name {
+    color: $PRIMARY_TEXT_COLOR;
+    font-size: 24px;
+    margin-bottom: $SPACING_1;
+}
+
+.ong-profile__contact-info {
+    font-size: 14px;
+    line-height: 1.2;
+
+    .material-icons.md-18 {
+        color: $SECONDARY_TEXT_COLOR;
+        font-size: 18px;
+        margin-right: 4px;
+    }
+}
