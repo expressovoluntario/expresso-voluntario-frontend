@@ -11,7 +11,7 @@
             $stateProvider
                 .state('profile', {
                     url: "/profile",
-                    templateUrl: "/app/modules/ong/list/list.html"
+                    templateUrl: "/app/modules/ong/ong.html"
                 });
         }
 

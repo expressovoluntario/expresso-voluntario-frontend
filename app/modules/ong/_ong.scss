@@ -1,1 +1,163 @@
-@import "list/list";
+.ong-profile__contact-wrapper {
+    padding: $SPACING_1;
+    border: 1px solid $DIVIDER_COLOR;
+}
+
+    .ong-profile__logo {
+        text-align: center;
+
+        .md-48 {
+            color: $SECONDARY_TEXT_COLOR;
+            font-size: 48px;
+        }
+    }
+
+    .ong-profile__contact {
+        .md-icon {
+            color: $SECONDARY_TEXT_COLOR;
+        }
+    }
+
+    .ong-profile__contact-name {
+        color: $PRIMARY_TEXT_COLOR;
+        font-size: 24px;
+        margin-bottom: $SPACING_1;
+    }
+
+    .ong-profile__contact-info {
+        font-size: 14px;
+        line-height: 1.2;
+        display: table;
+        table-layout: fixed;
+
+    }
+
+    .ong-profile__contact-info-icon,
+    .ong-profile__contact-info-text {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .ong-profile__contact-info-icon {
+        color: $SECONDARY_TEXT_COLOR;
+        width: 25px;
+
+        .material-icons {
+            font-size: 18px;
+        }
+    }
+
+    .ong-profile__contact-info-text {
+        color: $PRIMARY_TEXT_COLOR;
+    }
+
+
+.ong-profile__main {
+    margin-top: $SPACING_4;
+}
+
+    .ong-profile__main-tabs {
+        border-bottom: 1px solid $DIVIDER_COLOR;
+        @include no-selectable;
+    }
+
+    .ong-profile__main-tab {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 16px;
+        color: #bbb;
+        cursor: pointer;
+
+        &:hover {
+            color: $SECONDARY_TEXT_COLOR;
+        }
+
+        &.is-active {
+            margin-bottom: -1px;
+            border-left: 1px solid $DIVIDER_COLOR;
+            border-right: 1px solid $DIVIDER_COLOR;
+            border-top: 2px solid $ACCENT_COLOR;
+            border-bottom: 1px solid #fff;
+            color: $PRIMARY_TEXT_COLOR;
+        }
+    }
+
+    .ong-profile__main-search,
+    .ong-profile__main-tasks {
+        border-left: 1px solid $DIVIDER_COLOR;
+        border-right: 1px solid $DIVIDER_COLOR;
+    }
+
+    .ong-profile__main-search {
+        border-bottom: 1px solid $DIVIDER_COLOR;
+        height: 100px;
+    }
+
+    .ong-profile__main-toolbar {
+        border-bottom: 1px solid $DIVIDER_COLOR;
+        border-left: 1px solid $DIVIDER_COLOR;
+        border-right: 1px solid $DIVIDER_COLOR;
+        padding: $SPACING_2 ;
+    }
+
+    .ong-profile__main-tasks {
+        border-bottom: 1px solid $DIVIDER_COLOR;
+    }
+
+
+    .ong-profile__task {
+        border-bottom: 1px solid $DIVIDER_COLOR;
+        color: $PRIMARY_TEXT_COLOR;
+        cursor: pointer;
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        height: 50px;
+        padding-left: $SPACING_2;
+        padding-right: $SPACING_2;
+        line-height: 1.2;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+
+    .ong-profile__task-title,
+    .ong-profile__task-status {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .ong-profile__task-title {
+    }
+
+    .ong-profile__task-status {
+        width: 100px;
+        text-align: right;
+    }
+
+    .ong-profile__about {
+        border-left: 1px solid $DIVIDER_COLOR;
+        border-right: 1px solid $DIVIDER_COLOR;
+        border-bottom: 1px solid $DIVIDER_COLOR;
+        padding: $SPACING_2;
+
+        p {
+            margin-bottom: $SPACING_2;
+            line-height: 1.5;
+        }
+    }
+
+    .badge-status {
+        border-radius: 16px;
+        display: inline-block;
+        height: 24px;
+        line-height: 20px;
+        padding: 0 8px;
+        border: 2px solid #ccc;
+        font-size: 12px;
+    }

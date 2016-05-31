@@ -1,0 +1,170 @@
+<section class="u-padding-top-2" ng-controller="OngCtrl as controller">
+    <div class="expresso-container">
+        <section class="ong-profile__contact-wrapper pure-g">
+            <div class="ong-profile__logo pure-u-1-5" ng-if="false">
+                <i class="material-icons md-48">photo_camera</i>
+            </div>
+
+            <!-- MODO VISUALIZAÇÃO  -->
+            <div class="ong-profile__contact pure-u-4-5" ng-if="!controller.isEditing">
+                <article class="ong-profile__contact-name">
+                    <i class=""></i>
+                    Escola Vó Maria Felix
+                    <!-- <button ng-click="controller.toggleEdit()" class="" type="button" name="button">
+                        Editar
+                    </button> -->
+                </article>
+
+                <article class="ong-profile__contact-info">
+                    <div class="ong-profile__contact-info-icon">
+                        <i class="material-icons">location_on</i>
+                    </div>
+                    <div class="ong-profile__contact-info-text">
+                        Rua Guaraciaba, 311 - Jardim Ismênia - São José dos Campos - SP
+                    </div>
+                </article>
+
+                <article class="ong-profile__contact-info">
+                    <div class="ong-profile__contact-info-icon">
+                        <i class="material-icons">phone</i>
+                    </div>
+                    <div class="ong-profile__contact-info-text">
+                        (12) 3333-3333 | (12) 4444-4444
+                    </div>
+                </article>
+
+                <article class="ong-profile__contact-info">
+                    <div class="ong-profile__contact-info-icon">
+                        <i class="material-icons">email</i>
+                    </div>
+                    <div class="ong-profile__contact-info-text">
+                        ong@mail.com
+                    </div>
+                </article>
+            </div>
+
+            <!-- MODO EDIÇÃO  -->
+            <div class="ong-profile__contact pure-u-4-5" ng-if="controller.isEditing">
+                <h1 class="ong-profile__contact-name">
+                    Dados de contato
+                    <button ng-click="controller.toggleEdit()" class="" type="button" name="button">
+                        Salvar
+                    </button>
+                </h1>
+                <md-input-container class="md-block">
+                    <label>Nome da instituição</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/social/svg/production/ic_location_city_24px.svg" class="md-icon"></md-icon>
+                    <input type="text" name="ong" ng-model="controller.ong">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Endereço</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_location_on_24px.svg" class="md-icon"></md-icon>
+                    <input type="text" name="endereco" ng-model="controller.endereco">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Telefone 1</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_phone_24px.svg" class="md-icon"></md-icon>
+                    <input type="text" name="phone1" ng-model="controller.phone1">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Telefone 2</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_phone_24px.svg" class="md-icon"></md-icon>
+                    <input type="text" name="phone2" ng-model="controller.phone2">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>E-mail</label>
+                    <md-icon md-svg-src="bower_components/material-design-icons/communication/svg/production/ic_email_24px.svg" class="md-icon"></md-icon>
+                    <input type="email" name="email" ng-model="controller.email">
+                </md-input-container>
+            </div>
+        </section>
+
+        <section class="ong-profile__main">
+            <div class="ong-profile__main-tabs">
+                <div ng-click="controller.setCurrentTab('tasks')"
+                     ng-class="{'is-active' : controller.isCurrentTab('tasks')}"
+                     class="ong-profile__main-tab is-active">
+                     Tarefas
+                </div>
+                <div ng-click="controller.setCurrentTab('about')"
+                     ng-class="{'is-active' : controller.isCurrentTab('about')}"
+                     class="ong-profile__main-tab">
+                     Sobre a instituição
+                </div>
+            </div>
+
+            <!-- TAB TASKS -->
+            <div ng-show="controller.isCurrentTab('tasks')">
+                <div class="ong-profile__main-search">
+
+                </div>
+
+                <div class="ong-profile__main-toolbar">
+                    Adicionar tarefa
+                </div>
+
+                <div class="ong-profile__main-tasks">
+                    <ul>
+                        <li class="ong-profile__task">
+                            <div class="ong-profile__task-title">
+                                Desenvolver o website da instituição
+                            </div>
+                            <div class="ong-profile__task-status">
+                                <div class="badge-status">aberto</div>
+                            </div>
+                        </li>
+
+                        <li class="ong-profile__task">
+                            <div class="ong-profile__task-title">
+                                Desenvolver o website da instituição
+                            </div>
+                            <div class="ong-profile__task-status">
+                                <div class="badge-status">concluído</div>
+                            </div>
+                        </li>
+                        <li class="ong-profile__task">
+                            <div class="ong-profile__task-title">
+                                Desenvolver o website da instituição
+                            </div>
+                            <div class="ong-profile__task-status">
+                                <div class="badge-status">concluído</div>
+                            </div>
+                        </li>
+                        <li class="ong-profile__task">
+                            <div class="ong-profile__task-title">
+                                Desenvolver o website da instituição
+                            </div>
+                            <div class="ong-profile__task-status">
+                                <div class="badge-status">concluído</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- FIM TAB TASKS -->
+
+
+            <!-- TAB ABOUT -->
+            <div ng-show="controller.isCurrentTab('about')" class="ong-profile__about">
+                <div class="" style="text-align: right">
+                    edit
+                </div>
+
+                <div class="">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis euismod faucibus. Praesent imperdiet nibh sodales hendrerit pretium. Quisque tempus posuere turpis, sed ornare felis sagittis in. Aliquam rutrum diam bibendum finibus venenatis. Aenean at tortor imperdiet, varius neque eget, pulvinar augue. Vivamus non dapibus ante. Nullam faucibus cursus urna, in maximus erat aliquam sit amet. Aliquam lacinia nisi sit amet est ultrices tempor in sed sapien. Fusce posuere, mi lobortis volutpat aliquet, lacus sapien consequat nunc, ut aliquet justo justo non mauris. Aenean dictum mattis fringilla. Nam vitae lacus mi. Proin ut egestas ligula, vitae molestie mauris. Curabitur consectetur sem felis, eu ornare orci blandit vitae. Etiam mollis blandit suscipit. Suspendisse vitae justo mi.
+                    </p>
+                    <p>
+                        Sed egestas iaculis commodo. Aliquam ac ornare felis. Curabitur luctus laoreet orci. Aliquam faucibus justo ut turpis suscipit, quis aliquam est vehicula. Maecenas quis ornare diam. Aliquam ac erat pretium, elementum ex a, accumsan orci. Proin eleifend vulputate dictum. Proin varius rhoncus ex, aliquam molestie mi tincidunt non. Etiam tristique tempor ex nec rhoncus.
+                    </p>
+                    <p>
+                        Praesent tristique turpis vitae faucibus congue. Pellentesque in tincidunt purus, faucibus interdum erat. Nullam magna ipsum, maximus non semper at, suscipit non orci. Donec elementum mollis tincidunt. Cras tincidunt, nulla ac cursus pretium, libero diam viverra leo, in ullamcorper libero lectus vel felis. Praesent sit amet porttitor quam, vitae efficitur nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer interdum vel sapien eget molestie. Sed egestas mollis sem quis commodo. Nullam varius dolor vehicula elit consectetur, at dignissim lectus maximus. Vestibulum venenatis sapien lorem, condimentum suscipit neque lobortis et. In ac orci consequat, convallis libero quis, laoreet massa. Suspendisse odio lacus, varius vel ipsum sed, efficitur aliquam leo. Suspendisse mattis tellus dui, sit amet volutpat justo eleifend in. Etiam vitae pretium metus, id vehicula dolor. In ultrices turpis tellus, elementum dignissim purus eleifend id.
+                    </p>
+                </div>
+            </div>
+            <!-- FIM TAB ABOUT -->
+
+        </section>
+    </div>
+
+</section>

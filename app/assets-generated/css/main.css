@@ -403,6 +403,10 @@ b {
   font-weight: bold;
 }
 
+* {
+  outline: none;
+}
+
 @font-face {
   font-family: 'Roboto';
   src: url("/app/assets/fonts/roboto/Roboto-Regular.ttf") format("truetype");
@@ -496,7 +500,7 @@ b {
 .page-home .page-home__form-wrapper {
   padding: 16px;
   max-width: 700px;
-  border: 1px solid #b6b6b6;
+  border: 1px solid #ddd;
   background-color: #fff;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -506,7 +510,7 @@ b {
 .page-home .page-home__form-title {
   margin-top: 24px;
   margin-bottom: 8px;
-  color: #212121;
+  color: #555;
   font-size: 24px;
 }
 .page-home .label-control {
@@ -577,23 +581,24 @@ b {
 }
 
 .ong-profile__contact-wrapper {
-  margin-top: 24px;
   padding: 8px;
-  background-color: #fff;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: 1px solid #ddd;
 }
 
 .ong-profile__logo {
   text-align: center;
 }
 .ong-profile__logo .md-48 {
-  color: #727272;
+  color: #888;
   font-size: 48px;
 }
 
+.ong-profile__contact .md-icon {
+  color: #888;
+}
+
 .ong-profile__contact-name {
-  color: #212121;
+  color: #555;
   font-size: 24px;
   margin-bottom: 8px;
 }
@@ -601,9 +606,130 @@ b {
 .ong-profile__contact-info {
   font-size: 14px;
   line-height: 1.2;
+  display: table;
+  table-layout: fixed;
 }
-.ong-profile__contact-info .material-icons.md-18 {
-  color: #727272;
+
+.ong-profile__contact-info-icon,
+.ong-profile__contact-info-text {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.ong-profile__contact-info-icon {
+  color: #888;
+  width: 25px;
+}
+.ong-profile__contact-info-icon .material-icons {
   font-size: 18px;
-  margin-right: 4px;
+}
+
+.ong-profile__contact-info-text {
+  color: #555;
+}
+
+.ong-profile__main {
+  margin-top: 32px;
+}
+
+.ong-profile__main-tabs {
+  border-bottom: 1px solid #ddd;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ong-profile__main-tab {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 16px;
+  color: #bbb;
+  cursor: pointer;
+}
+.ong-profile__main-tab:hover {
+  color: #888;
+}
+.ong-profile__main-tab.is-active {
+  margin-bottom: -1px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-top: 2px solid #ffc107;
+  border-bottom: 1px solid #fff;
+  color: #555;
+}
+
+.ong-profile__main-search,
+.ong-profile__main-tasks {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.ong-profile__main-search {
+  border-bottom: 1px solid #ddd;
+  height: 100px;
+}
+
+.ong-profile__main-toolbar {
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  padding: 16px;
+}
+
+.ong-profile__main-tasks {
+  border-bottom: 1px solid #ddd;
+}
+
+.ong-profile__task {
+  border-bottom: 1px solid #ddd;
+  color: #555;
+  cursor: pointer;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  height: 50px;
+  padding-left: 16px;
+  padding-right: 16px;
+  line-height: 1.2;
+}
+.ong-profile__task:last-of-type {
+  border-bottom: none;
+}
+.ong-profile__task:hover {
+  background-color: #eee;
+}
+
+.ong-profile__task-title,
+.ong-profile__task-status {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.ong-profile__task-status {
+  width: 100px;
+  text-align: right;
+}
+
+.ong-profile__about {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 16px;
+}
+.ong-profile__about p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.badge-status {
+  border-radius: 16px;
+  display: inline-block;
+  height: 24px;
+  line-height: 20px;
+  padding: 0 8px;
+  border: 2px solid #ccc;
+  font-size: 12px;
 }
