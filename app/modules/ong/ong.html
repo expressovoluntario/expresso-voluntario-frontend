@@ -94,13 +94,19 @@
             </div>
 
             <!-- TAB TASKS -->
-            <div ng-show="controller.isCurrentTab('tasks')">
+            <!-- <div ng-show="controller.isCurrentTab('tasks')"> -->
+            <div ng-show="false">
                 <div class="ong-profile__main-search">
-
+                    <div class="ong-profile__main-search-control">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Pesquisar tarefa</label>
+                            <input ng-model="controller.search">
+                        </md-input-container>
+                    </div>
                 </div>
 
                 <div class="ong-profile__main-toolbar">
-                    Adicionar tarefa
+                    add
                 </div>
 
                 <div class="ong-profile__main-tasks">
@@ -145,7 +151,8 @@
 
 
             <!-- TAB ABOUT -->
-            <div ng-show="controller.isCurrentTab('about')" class="ong-profile__about">
+            <!-- <div ng-show="controller.isCurrentTab('about')" class="ong-profile__about"> -->
+            <div ng-show="false" class="ong-profile__about">
                 <div class="" style="text-align: right">
                     edit
                 </div>
@@ -163,6 +170,48 @@
                 </div>
             </div>
             <!-- FIM TAB ABOUT -->
+
+            <!-- TASK DETAIL -->
+            <div class="ong-profile__task-detail">
+                <div class="ong-profile__task-detail-title">
+                    Desenvolver Website da instituição
+                </div>
+
+                <div class="ong-profile__task-detail-header">
+                    <table class="ong-profile__task-detail-meta">
+                        <tr>
+                            <th>Criado em:</th>
+                            <td>23 de Maio de 2016</td>
+                        </tr>
+                        <tr>
+                            <th>Recorrência:</th>
+                            <td>Não se repete</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>Em aberto</td>
+                        </tr>
+                        <tr>
+                            <th>Palavras chaves:</th>
+                            <td>Computação, Programação, Desenvolvimento de Software, Software, Website, Site, Design, Front-end</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div class="ong-profile__task-detail-section">
+                    <h4 class="ong-profile__task-detail-section-title">Descrição da tarefa</h4>
+
+                    <pre>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nisl tellus, porttitor hendrerit lacus hendrerit, maximus rutrum nisl. Integer at risus libero. Praesent placerat libero at pellentesque aliquam. Nunc feugiat lectus elit, eu lobortis tellus interdum at. Maecenas quis ipsum urna. Maecenas quis turpis id massa ultrices imperdiet. Nulla facilisi. Morbi a ornare nunc, ut rhoncus libero. Nunc ornare nunc eget sem pellentesque, eu facilisis nulla commodo. Aliquam erat volutpat. Sed feugiat accumsan ante, sit amet ornare justo finibus nec. Phasellus semper finibus leo, sed fringilla sem tincidunt vel. Sed a nisi tincidunt, pellentesque dui sit amet, finibus felis. Phasellus efficitur nisi metus, quis rhoncus sem interdum a. Suspendisse sed ultricies arcu.
+
+Donec mollis nibh neque, at elementum lorem elementum ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum lectus magna, euismod non rutrum ac, dapibus id nibh. Pellentesque nisi ipsum, aliquet et scelerisque id, molestie sed risus. Quisque volutpat vel elit et volutpat. Curabitur velit neque, varius vitae tempus non, pretium in dolor. In hac habitasse platea dictumst. Vivamus fermentum diam dui, vestibulum gravida nisl consequat et. Donec molestie cursus ligula eu dictum. Sed ac bibendum lorem. Donec consequat nulla lectus, nec dictum mi aliquam vitae. Duis vehicula urna et velit molestie, at accumsan nisl luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat risus a risus vestibulum, non blandit elit vulputate.
+
+Proin scelerisque erat neque, id viverra massa tristique nec. Proin nec posuere massa, vitae venenatis lorem. Curabitur non pretium dolor. Nullam aliquam tortor in rutrum accumsan. Suspendisse id vestibulum erat. Pellentesque ullamcorper pharetra tempus. Nunc leo nulla, aliquam dapibus consectetur rhoncus, convallis in diam. Aenean ac sem turpis. Suspendisse et semper lectus. Etiam sit amet volutpat orci. Fusce faucibus, velit eget auctor fringilla, tortor ipsum placerat velit, eu laoreet dolor massa nec urna. Vivamus at semper erat. Fusce in mattis quam.
+                    </pre>
+                </div>
+
+            </div>
 
         </section>
     </div>

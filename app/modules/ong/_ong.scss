@@ -1,6 +1,7 @@
 .ong-profile__contact-wrapper {
     padding: $SPACING_1;
     border: 1px solid $DIVIDER_COLOR;
+    border-top: 2px solid $ACCENT_COLOR;
 }
 
     .ong-profile__logo {
@@ -90,7 +91,20 @@
 
     .ong-profile__main-search {
         border-bottom: 1px solid $DIVIDER_COLOR;
-        height: 100px;
+    }
+
+    .ong-profile__main-search-control {
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: $SPACING_3;
+        padding-bottom: $SPACING_2;
+        max-width: 40%;
+        min-width: 250px;
+
+        md-input-container {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 
     .ong-profile__main-toolbar {
@@ -160,4 +174,51 @@
         padding: 0 8px;
         border: 2px solid #ccc;
         font-size: 12px;
+    }
+
+    .ong-profile__task-detail {
+        border-left: 1px solid $DIVIDER_COLOR;
+        border-right: 1px solid $DIVIDER_COLOR;
+        border-bottom: 1px solid $DIVIDER_COLOR;
+    }
+
+    .ong-profile__task-detail-title {
+        padding: $SPACING_2;
+        font-size: 24px;
+    }
+
+    .ong-profile__task-detail-header {
+        padding: 0 $SPACING_2 $SPACING_2 $SPACING_2;
+    }
+
+    .ong-profile__task-detail-meta {
+        table-layout: fixed;
+        width: 100%;
+        line-height: 1.5;
+
+        th {
+            padding-left: 4px;
+            width: 90px;
+        }
+
+        th,
+        td {
+            padding-bottom: 2px;
+            font-size: 12px;
+            background-color: #eee;
+        }
+    }
+
+    .ong-profile__task-detail-section {
+        padding: 0 $SPACING_2 $SPACING_2 $SPACING_2;
+
+        pre {
+            white-space: pre-line;
+            line-height: 1.5;
+        }
+    }
+
+    .ong-profile__task-detail-section-title {
+        margin-bottom: 16px;
+        font-size: 20px;
     }
