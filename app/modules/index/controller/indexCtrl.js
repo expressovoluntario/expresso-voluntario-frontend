@@ -2,11 +2,11 @@
 (function(angular) {
     'use strict';
 
-    var home;
-    home = angular.module('expresso.modules.home');
-    home.controller('HomeCtrl', HomeCtrl);
+    var index;
+    index = angular.module('expresso.modules.index');
+    index.controller('IndexCtrl', IndexCtrl);
 
-    function HomeCtrl($scope, $http) {
+    function IndexCtrl($scope, $http) {
         // init variables
         $scope.email;
         $scope.interest;

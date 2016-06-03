@@ -354,6 +354,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   margin-right: 48px;
 }
 
+.u-float-right {
+  float: right;
+}
+
+.u-float-left {
+  float: left;
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -388,6 +396,12 @@ body {
 .expresso-container.is-vertical-spacing {
   padding-top: 16px;
   padding-bottom: 16px;
+}
+
+.expresso-container-smaller {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 body {
@@ -643,6 +657,11 @@ b {
   user-select: none;
 }
 
+.ong-profile__main-body {
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
 .ong-profile__main-tab {
   display: inline-block;
   padding: 15px 25px;
@@ -660,12 +679,6 @@ b {
   border-top: 2px solid #ffc107;
   border-bottom: 1px solid #fff;
   color: #555;
-}
-
-.ong-profile__main-search,
-.ong-profile__main-tasks {
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
 }
 
 .ong-profile__main-search {
@@ -686,14 +699,15 @@ b {
 }
 
 .ong-profile__main-toolbar {
+  padding: 4px;
   border-bottom: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  padding: 16px;
 }
-
-.ong-profile__main-tasks {
-  border-bottom: 1px solid #ddd;
+.ong-profile__main-toolbar:before, .ong-profile__main-toolbar:after {
+  content: "";
+  display: table;
+}
+.ong-profile__main-toolbar:after {
+  clear: both;
 }
 
 .ong-profile__task {
@@ -727,14 +741,24 @@ b {
 }
 
 .ong-profile__about {
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
   padding: 16px;
 }
-.ong-profile__about p {
-  margin-bottom: 16px;
+.ong-profile__about pre {
+  white-space: pre-line;
   line-height: 1.5;
+}
+
+.ong-profile__about-edit {
+  padding: 16px;
+}
+
+.ong-profile__about-title {
+  padding: 16px 0;
+  font-size: 24px;
+}
+
+.ong-profile__about-empty-case {
+  text-align: center;
 }
 
 .badge-status {
@@ -745,12 +769,6 @@ b {
   padding: 0 8px;
   border: 2px solid #ccc;
   font-size: 12px;
-}
-
-.ong-profile__task-detail {
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
 }
 
 .ong-profile__task-detail-title {
@@ -789,4 +807,12 @@ b {
 .ong-profile__task-detail-section-title {
   margin-bottom: 16px;
   font-size: 20px;
+}
+
+.ong-profile__task-detail-edit {
+  padding: 16px;
+}
+
+md-input-container .md-errors-spacer {
+  min-height: 0;
 }

@@ -3,10 +3,11 @@
 
     angular
         .module('expresso.modules', [
-            'expresso.modules.home',
+            'expresso.modules.index',
             'expresso.modules.login',
             'expresso.modules.ong',
-            'expresso.modules.sharedTemplates'
+            'expresso.modules.sharedTemplates',
+            'expresso.modules.user'
         ]);
 
 })(angular);
