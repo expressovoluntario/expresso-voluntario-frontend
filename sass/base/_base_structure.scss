@@ -32,3 +32,9 @@ body {
         padding-bottom: $SPACING_2;
     }
 }
+
+.expresso-container-smaller {
+    width: 100%;
+    max-width: $MAX_WIDTH_CONTENT_SMALLER;
+    margin: 0 auto;
+}

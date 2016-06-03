@@ -62,6 +62,11 @@
         @include no-selectable;
     }
 
+    .ong-profile__main-body {
+        border: 1px solid $DIVIDER_COLOR;
+        border-top: none;
+    }
+
     .ong-profile__main-tab {
         display: inline-block;
         padding: 15px 25px;
@@ -85,8 +90,6 @@
 
     .ong-profile__main-search,
     .ong-profile__main-tasks {
-        border-left: 1px solid $DIVIDER_COLOR;
-        border-right: 1px solid $DIVIDER_COLOR;
     }
 
     .ong-profile__main-search {
@@ -108,14 +111,12 @@
     }
 
     .ong-profile__main-toolbar {
+        padding: 4px;
         border-bottom: 1px solid $DIVIDER_COLOR;
-        border-left: 1px solid $DIVIDER_COLOR;
-        border-right: 1px solid $DIVIDER_COLOR;
-        padding: $SPACING_2 ;
+        @include clearfix;
     }
 
     .ong-profile__main-tasks {
-        border-bottom: 1px solid $DIVIDER_COLOR;
     }
 
 
@@ -155,15 +156,25 @@
     }
 
     .ong-profile__about {
-        border-left: 1px solid $DIVIDER_COLOR;
-        border-right: 1px solid $DIVIDER_COLOR;
-        border-bottom: 1px solid $DIVIDER_COLOR;
         padding: $SPACING_2;
 
-        p {
-            margin-bottom: $SPACING_2;
+        pre {
+            white-space: pre-line;
             line-height: 1.5;
         }
+    }
+
+    .ong-profile__about-edit {
+        padding: $SPACING_2;
+    }
+
+    .ong-profile__about-title {
+        padding: $SPACING_2 0;
+        font-size: 24px;
+    }
+
+    .ong-profile__about-empty-case {
+        text-align: center;
     }
 
     .badge-status {
@@ -177,9 +188,6 @@
     }
 
     .ong-profile__task-detail {
-        border-left: 1px solid $DIVIDER_COLOR;
-        border-right: 1px solid $DIVIDER_COLOR;
-        border-bottom: 1px solid $DIVIDER_COLOR;
     }
 
     .ong-profile__task-detail-title {
@@ -221,4 +229,12 @@
     .ong-profile__task-detail-section-title {
         margin-bottom: 16px;
         font-size: 20px;
+    }
+
+    .ong-profile__task-detail-edit {
+        padding: $SPACING_2;
+    }
+
+    md-input-container .md-errors-spacer {
+        min-height: 0;
     }
