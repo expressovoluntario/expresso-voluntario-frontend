@@ -1,0 +1,29 @@
+<nav class="expresso-menu__menu">
+    <ul ng-if="!controller.isUserAuthenticated()" class="expresso-menu__menu">
+        <li class="expresso-menu__item"><a ui-sref="signup">Cadastre-se</a></li>
+        <li class="expresso-menu__item"><a ui-sref="login">Entrar</a></li>
+    </ul>
+
+    <md-menu ng-if="controller.isUserAuthenticated()">
+        <md-button aria-label="Abrir menu" class="md-icoutton" ng-click="controller.openMenu($mdOpenMenu, $event)">
+            <!-- <md-icon
+                md-menu-origin
+                md-svg-src="bower_components/material-design-icons/navigation/svg/production/ic_menu_24px.svg">
+            </md-icon> -->
+            Menu
+            <md-icon
+                md-menu-origin
+                md-svg-src="bower_components/material-design-icons/hardware/svg/production/ic_keyboard_arrow_down_24px.svg"
+                class="expresso-menu__icon">
+            </md-icon>
+        </md-button>
+        <md-menu-content width="4">
+            <md-menu-item>
+                <md-button ng-click="controller.logout()">
+                    <md-icon md-menu-origin md-svg-src="bower_components/material-design-icons/action/svg/production/ic_power_settings_new_24px.svg"></md-icon>
+                    Sair
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</nav>

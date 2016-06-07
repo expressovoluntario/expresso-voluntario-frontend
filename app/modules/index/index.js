@@ -1,10 +1,28 @@
 /*globals angular:false*/
-(function(angular) {
+(function (angular) {
     'use strict';
 
-    var index;
-    index = angular.module('expresso.modules.index');
-    index.controller('IndexCtrl', IndexCtrl);
+    angular
+        .module('expresso.modules.index', [])
+        .config(config)
+        .controller('IndexCtrl', IndexCtrl);
+
+    function config($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("404");
+
+        $stateProvider
+            .state('index', {
+                url: '/',
+                templateUrl: '/app/modules/index/index.html',
+                controller: 'IndexCtrl'
+            })
+            .state('index2', {
+                url: '',
+                templateUrl: '/app/modules/index/index.html',
+                controller: 'IndexCtrl'
+            });
+    }
+
 
     function IndexCtrl($scope, $http) {
         // init variables
@@ -39,6 +57,6 @@
         function setFormState(state) {
             $scope.formState = state;
         }
-
     }
+
 })(angular);

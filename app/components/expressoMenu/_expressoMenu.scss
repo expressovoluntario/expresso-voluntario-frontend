@@ -1,0 +1,25 @@
+.expresso-menu__menu {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: $EXPRESSO_HEADER_HEIGHT;
+
+    a {
+        color: #fff;
+        display: block;
+
+        &:hover { color: $COLOR_LINK; }
+    }
+
+}
+
+.expresso-menu__item {
+    height: 100%;
+    margin-left: $SPACING_2;
+    display: inline-block;
+}
+
+.expresso-menu__icon {
+    color: #fff;
+}

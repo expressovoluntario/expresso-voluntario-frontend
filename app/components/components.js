@@ -1,3 +1,7 @@
-angular.module('expresso.components', [
-        // Add here the components modules
-    ]);
+/* globals angular:false */
+(function (angular) {
+
+    'use strict';
+    angular.module('expresso.components', []);
+
+})(angular);

@@ -448,25 +448,29 @@ b {
   color: #fff;
 }
 
-.expresso-header__menu {
+.expresso-menu__menu {
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
   text-align: right;
   line-height: 50px;
 }
-.expresso-header__menu a {
+.expresso-menu__menu a {
   color: #fff;
   display: block;
 }
-.expresso-header__menu a:hover {
+.expresso-menu__menu a:hover {
   color: #ffc107;
 }
 
-.expresso-header__menu-item {
+.expresso-menu__item {
   height: 100%;
   margin-left: 16px;
   display: inline-block;
+}
+
+.expresso-menu__icon {
+  color: #fff;
 }
 
 .page-home {

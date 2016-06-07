@@ -1,3 +1,4 @@
+/* globals angular:false */
 (function(angular) {
     'use strict'
 

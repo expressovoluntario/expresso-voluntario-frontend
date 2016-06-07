@@ -1,34 +1,46 @@
+/* globals angular:false */
 (function (angular) {
     'use strict';
 
-    var expresso;
-    expresso = angular.module('MyApp', [
+    var dependencies = [
         'ui.router',
         'ngMaterial',
         'ngMessages',
         'ngResource',
         'angular-google-analytics',
-
         'expresso.components',
         'expresso.modules'
-    ]);
+    ];
 
-    expresso.config(function($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+    angular
+        .module('MyApp', dependencies)
+        .config(config)
+        .run(analytics)
 
-        // dont remove trailing slashes from urls
+
+    function config($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+        // Não remover as barras da url
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
+        setAngularMaterial($mdThemingProvider);
+
+        // Configura o Google Analytics
+        setGoogleAnalytics(AnalyticsProvider);
+    }
+
+    function setAngularMaterial($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('amber');
+    }
 
-        // Configura o Google Analytics
+    function setGoogleAnalytics(AnalyticsProvider) {
         AnalyticsProvider
             .setAccount('UA-67297111-2')
             .setPageEvent('$stateChangeSuccess');
-    });
+    }
 
-    expresso.run(function(Analytics) {});
+    function analytics(Analytics) {}
 
 })(angular);

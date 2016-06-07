@@ -1,49 +1,200 @@
+/* globals angular:false */
 (function (angular) {
     'use strict';
 
-    var expresso;
-    expresso = angular.module('MyApp', [
+    var dependencies = [
         'ui.router',
         'ngMaterial',
         'ngMessages',
         'ngResource',
         'angular-google-analytics',
-
         'expresso.components',
         'expresso.modules'
-    ]);
+    ];
 
-    expresso.config(function($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+    angular
+        .module('MyApp', dependencies)
+        .config(config)
+        .run(analytics)
 
-        // dont remove trailing slashes from urls
+
+    function config($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
+        // Não remover as barras da url
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
+        setAngularMaterial($mdThemingProvider);
+
+        // Configura o Google Analytics
+        setGoogleAnalytics(AnalyticsProvider);
+    }
+
+    function setAngularMaterial($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('amber');
+    }
 
-        // Configura o Google Analytics
+    function setGoogleAnalytics(AnalyticsProvider) {
         AnalyticsProvider
             .setAccount('UA-67297111-2')
             .setPageEvent('$stateChangeSuccess');
-    });
+    }
 
-    expresso.run(function(Analytics) {});
+    function analytics(Analytics) {}
 
 })(angular);
 
-angular.module('expresso.components', [
-        // Add here the components modules
-    ]);
+/* globals angular:false */
+(function (angular) {
+
+    'use strict';
+    angular.module('expresso.components', []);
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.components')
+        .directive('expressoMenu', expressoMenu)
+        .controller('expressoMenuCtrl', expressoMenuCtrl)
+
+     function expressoMenu() {
+        return {
+            'restrict': 'E',
+            'templateUrl': '/app/components/expressoMenu/expressoMenu.html',
+            'scope': {},
+            'controller': expressoMenuCtrl,
+            'controllerAs': 'controller'
+        }
+    }
+
+    function expressoMenuCtrl(UserSession) {
+        var controller = this, originatorEv;
+        init();
+
+        function init() {
+            controller.isUserAuthenticated = isUserAuthenticated;
+            controller.logout = logout;
+            controller.openMenu = openMenu;
+        }
+
+        function isUserAuthenticated() {
+            return UserSession.isAuthenticated();
+        }
+
+        function logout() {
+            UserSession.logout();
+        }
+
+        function openMenu($mdOpenMenu, ev) {
+            originatorEv = ev;
+            $mdOpenMenu(ev);
+        }
+    }
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.modules', [
+            'expresso.modules.home',
+            'expresso.modules.index',
+            'expresso.modules.login',
+            'expresso.modules.ong',
+            'expresso.modules.services',
+            'expresso.modules.sharedTemplates',
+            'expresso.modules.user'
+        ]);
+
+})(angular);
+
+/* globals angular:false */
+(function(angular) {
+    'use strict'
+
+    angular
+        .module('expresso.modules.home', [])
+        .config(config)
+        .controller('HomeCtrl', HomeCtrl);
+
+        // CONFIGURAÇÕES DE ROTAS
+        function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
+
+            $stateProvider
+                .state('home', {
+                    url: "/home/{id}",
+                    templateUrl: "/app/modules/home/home.html"
+                });
+        }
+
+        // CONTROLLER
+        function HomeCtrl(UserSession) {
+            var controller = this
+            init();
+
+            function init() {
+                // controller.isEditing = false;
+                controller.currentTab = 'tasks';
+                controller.taskTags = [];
+                controller.taskStatus = getStatusOptions();
+                controller.taskStatusSelected = null;
+                controller.taskRecurrence = getRecurrenceOptions();
+                controller.taskRecurrenceSelected = null;
+                controller.taskDescription = null;
+
+                // controller.toggleEdit = toggleEdit;
+                controller.setCurrentTab = setCurrentTab;
+                controller.isCurrentTab = isCurrentTab;
+
+                console.log('getUser: ')
+                console.log(UserSession.getUser());
+            }
+
+            // TASK
+            function getRecurrenceOptions() {
+                var options = ['única', 'recorrente'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+            // TASK
+            function getStatusOptions() {
+                var options = ['aberto', 'concluído', 'andamento'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+
+            function setCurrentTab(tab) {
+                controller.currentTab = tab;
+            }
+
+            function isCurrentTab(tab) {
+                return controller.currentTab === tab;
+            }
+        }
+
+})(angular);
 
 /*globals angular:false*/
 (function (angular) {
     'use strict';
 
-    var index;
-    index = angular.module('expresso.modules.index', [])
-    index.config(config);
+    angular
+        .module('expresso.modules.index', [])
+        .config(config)
+        .controller('IndexCtrl', IndexCtrl);
 
     function config($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("404");
@@ -60,147 +211,7 @@ angular.module('expresso.components', [
                 controller: 'IndexCtrl'
             });
     }
-})(angular);
 
-(function(angular) {
-    'use strict'
-
-    angular
-        .module('expresso.modules.login', [])
-        .config(config);
-
-    function config ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("404");
-
-        $stateProvider
-            .state('login', {
-                url: "/login",
-                templateUrl: "/app/modules/login/login.html"
-            })
-
-            .state('signup', {
-                url: "/signup",
-                templateUrl: "/app/modules/login/login.html"
-            });
-    }
-
-})(angular);
-
-/* globals angular:false */
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('expresso.modules.login')
-        .factory('LoginResource', LoginResource);
-
-    function LoginResource($resource) {
-        return $resource('url', {'_id' : '@_id'}, {
-            'update' : {
-                'method' : 'PUT'
-            }
-        });
-    }
-
-})(angular);
-
-(function(angular) {
-    'use strict'
-
-    angular
-        .module('expresso.modules.ong', [])
-        .config(config);
-
-        function config ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("404");
-
-            $stateProvider
-                .state('profile', {
-                    url: "/profile",
-                    templateUrl: "/app/modules/ong/ong.html"
-                });
-        }
-
-})(angular);
-
-/* globals angular:false */
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('expresso.modules.ong')
-        .factory('OngResource', OngResource);
-
-    function OngResource($resource) {
-        return $resource('http://localhost:5000/ong/:_id/', {'_id' : '@_id'}, {
-            'update' : {
-                'method' : 'PUT'
-            }
-        });
-    }
-
-})(angular);
-
-(function(angular) {
-    'use strict';
-
-    var sharedTemplates;
-    sharedTemplates = angular.module('expresso.modules.sharedTemplates', []);
-    sharedTemplates.config(config);
-
-    function config($stateProvider, $urlRouterProvider) {
-        $stateProvider
-            .state('404', {
-                url: "/404",
-                templateUrl: "/app/modules/sharedTemplates/404.html"
-            });
-    }
-})(angular);
-
-(function(angular) {
-    'use strict'
-
-    angular
-        .module('expresso.modules.user', [])
-        .config(config);
-
-        function config ($stateProvider, $urlRouterProvider) {
-            // $urlRouterProvider.otherwise("404");
-            //
-            // $stateProvider
-            //     .state('profile', {
-            //         url: "/profile",
-            //         templateUrl: "/app/modules/ong/ong.html"
-            //     });
-        }
-
-})(angular);
-
-/* globals angular:false */
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('expresso.modules.user')
-        .factory('UserResource', UserResource);
-
-    function UserResource($resource) {
-        return $resource('http://localhost:5000/user/:_id/', {'_id' : '@_id'}, {
-            'update' : {
-                'method' : 'PUT'
-            }
-        });
-    }
-
-})(angular);
-
-/*globals angular:false*/
-(function(angular) {
-    'use strict';
-
-    var index;
-    index = angular.module('expresso.modules.index');
-    index.controller('IndexCtrl', IndexCtrl);
 
     function IndexCtrl($scope, $http) {
         // init variables
@@ -235,17 +246,33 @@ angular.module('expresso.components', [
         function setFormState(state) {
             $scope.formState = state;
         }
-
     }
+
 })(angular);
 
 /* globals angular:false */
 (function(angular) {
-    'use strict';
+    'use strict'
 
     angular
-        .module('expresso.modules.login')
+        .module('expresso.modules.login', [])
+        .config(config)
         .controller('LoginCtrl', LoginCtrl);
+
+    function config ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("404");
+
+        $stateProvider
+            .state('login', {
+                url: "/login",
+                templateUrl: "/app/modules/login/login.html"
+            })
+
+            .state('signup', {
+                url: "/signup",
+                templateUrl: "/app/modules/login/login.html"
+            });
+    }
 
     function LoginCtrl($scope, $location) {
         var controller = this;
@@ -263,27 +290,30 @@ angular.module('expresso.components', [
             return path;
         }
     }
+
 })(angular);
 
 /* globals angular:false */
 (function (angular) {
     'use strict';
 
-    var login = angular.module('expresso.modules.login');
+    angular
+        .module('expresso.modules.login')
+        .directive('loginCard', loginCard);
 
-    login.directive('loginCard', function () {
+    function loginCard() {
         return {
             'restrict': 'E',
-            'templateUrl': '/app/modules/login/directives/loginCard.html',
+            'templateUrl': '/app/modules/login/loginCard.html',
             'scope': {
                 'role' : '='
             },
             'controller': loginCardCtrl,
             'controllerAs': 'controller'
         }
-    });
+    }
 
-    function loginCardCtrl($location, OngResource, UserResource) {
+    function loginCardCtrl($location, OngResource, UserResource, UserSession) {
         var controller = this;
         init();
 
@@ -317,7 +347,7 @@ angular.module('expresso.components', [
                 }
             }
             else if (path === '/login') {
-
+                UserSession.login(controller.email, controller.password);
             }
         }
 
@@ -327,7 +357,7 @@ angular.module('expresso.components', [
             user.email = controller.email;
             user.password = controller.password;
             user.$save().then(function(response) {
-                //redirect to profile
+                $location.path('/home/' + ongId);
             });
         }
 
@@ -364,70 +394,210 @@ angular.module('expresso.components', [
 
 /* globals angular:false */
 (function(angular) {
-    'use strict';
+    'use strict'
 
     angular
-        .module('expresso.modules.ong')
+        .module('expresso.modules.ong', [])
+        .config(config)
         .controller('OngCtrl', OngCtrl);
 
-    function OngCtrl() {
-        var controller = this;
-        init();
+        function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
 
-        function init() {
-            // controller.isEditing = false;
-            controller.currentTab = 'tasks';
-            controller.taskTags = [];
-            controller.taskStatus = getStatusOptions();
-            controller.taskStatusSelected = null;
-            controller.taskRecurrence = getRecurrenceOptions();
-            controller.taskRecurrenceSelected = null;
-            controller.taskDescription = null;
-
-            // controller.toggleEdit = toggleEdit;
-            controller.setCurrentTab = setCurrentTab;
-            controller.isCurrentTab = isCurrentTab;
+            $stateProvider
+                .state('profile', {
+                    url: "/profile",
+                    templateUrl: "/app/modules/ong/ong.html"
+                });
         }
 
-        // TASK
-        function getRecurrenceOptions() {
-            var options = ['única', 'recorrente'];
-            options = options.map(function(option) {
-                return { label : option };
-            });
-            return options;
+        function OngCtrl() {
+            var controller = this;
+            init();
+
+            function init() {
+                // controller.isEditing = false;
+                controller.currentTab = 'tasks';
+                controller.taskTags = [];
+                controller.taskStatus = getStatusOptions();
+                controller.taskStatusSelected = null;
+                controller.taskRecurrence = getRecurrenceOptions();
+                controller.taskRecurrenceSelected = null;
+                controller.taskDescription = null;
+
+                // controller.toggleEdit = toggleEdit;
+                controller.setCurrentTab = setCurrentTab;
+                controller.isCurrentTab = isCurrentTab;
+            }
+
+            // TASK
+            function getRecurrenceOptions() {
+                var options = ['única', 'recorrente'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+            // TASK
+            function getStatusOptions() {
+                var options = ['aberto', 'concluído', 'andamento'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+
+            function setCurrentTab(tab) {
+                controller.currentTab = tab;
+            }
+
+            function isCurrentTab(tab) {
+                return controller.currentTab === tab;
+            }
         }
 
-        // TASK
-        function getStatusOptions() {
-            var options = ['aberto', 'concluído', 'andamento'];
-            options = options.map(function(option) {
-                return { label : option };
-            });
-            return options;
-        }
-
-
-        function setCurrentTab(tab) {
-            controller.currentTab = tab;
-        }
-
-        function isCurrentTab(tab) {
-            return controller.currentTab === tab;
-        }
-    }
 })(angular);
 
+/* globals angular:false */
 (function (angular) {
     'use strict';
 
     angular
-        .module('expresso.modules', [
-            'expresso.modules.index',
-            'expresso.modules.login',
-            'expresso.modules.ong',
-            'expresso.modules.sharedTemplates',
-            'expresso.modules.user'
-        ]);
+        .module('expresso.modules.ong')
+        .factory('OngResource', OngResource);
+
+    function OngResource($resource) {
+        return $resource('http://localhost:5000/ong/:_id/', {'_id' : '@_id'}, {
+            'update' : {
+                'method' : 'PUT'
+            }
+        });
+    }
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.modules.services', [])
+        .factory('UserSession', UserSession)
+        .run(RunUserSession);
+
+    function RunUserSession(UserSession) {
+        // UserSession.create();
+    }
+
+    function UserSession($http, $location, UserResource) {
+        var user = {}, ong = {};
+
+        return {
+            login : function(email, password) {
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:5000/user/login',
+                    params: {
+                        'email': email,
+                        'password': password
+                    }
+                }).then(function successCallback(response) {
+                    user.id = response.data.id;
+                    user.name = response.data.name;
+                    user.email = response.data.email;
+                    user.isAuthenticated = response.data.is_authenticated;
+                    ong.id = response.data.ong_id;
+                    $location.path('/home/' + ong.id);
+                }, function errorCallback(response) {
+                    console.log("Erro ao realizar login. Resposta do servidor: " + response);
+                });
+            },
+
+            logout : function() {
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:5000/user/logout'
+                }).then(function successCallback(response) {
+                    user = {};
+                    ong = {};
+                    $location.path('/login');
+                }, function errorCallback(response) {
+                    console.log("Erro ao realizar logout. Resposta do servidor: " + response);
+                });
+            },
+
+            getUser : function() {
+                return user;
+            },
+
+            getOng : function() {
+                return ong;
+            },
+
+            isAuthenticated : function () {
+                if (!_.isEmpty(user)) {
+                    return user.isAuthenticated;
+                }
+                return false;
+            }
+        };
+    }
+
+})(angular);
+
+/* globals angular:false */
+(function(angular) {
+    'use strict';
+
+    var sharedTemplates;
+    sharedTemplates = angular.module('expresso.modules.sharedTemplates', []);
+    sharedTemplates.config(config);
+
+    function config($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('404', {
+                url: "/404",
+                templateUrl: "/app/modules/sharedTemplates/404.html"
+            });
+    }
+})(angular);
+
+/* globals angular:false */
+(function(angular) {
+    'use strict'
+
+    angular
+        .module('expresso.modules.user', [])
+        .config(config);
+
+        function config ($stateProvider, $urlRouterProvider) {
+            // $urlRouterProvider.otherwise("404");
+            //
+            // $stateProvider
+            //     .state('profile', {
+            //         url: "/profile",
+            //         templateUrl: "/app/modules/ong/ong.html"
+            //     });
+        }
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.modules.user')
+        .factory('UserResource', UserResource);
+
+    function UserResource($resource) {
+        return $resource('http://localhost:5000/user/:_id/', {'_id' : '@_id'}, {
+            'update' : {
+                'method' : 'PUT'
+            }
+        });
+    }
 
 })(angular);

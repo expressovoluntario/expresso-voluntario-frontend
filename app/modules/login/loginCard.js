@@ -2,21 +2,23 @@
 (function (angular) {
     'use strict';
 
-    var login = angular.module('expresso.modules.login');
+    angular
+        .module('expresso.modules.login')
+        .directive('loginCard', loginCard);
 
-    login.directive('loginCard', function () {
+    function loginCard() {
         return {
             'restrict': 'E',
-            'templateUrl': '/app/modules/login/directives/loginCard.html',
+            'templateUrl': '/app/modules/login/loginCard.html',
             'scope': {
                 'role' : '='
             },
             'controller': loginCardCtrl,
             'controllerAs': 'controller'
         }
-    });
+    }
 
-    function loginCardCtrl($location, OngResource) {
+    function loginCardCtrl($location, OngResource, UserResource, UserSession) {
         var controller = this;
         init();
 
@@ -26,6 +28,7 @@
             controller.password = undefined;
             controller.confirmPassword = undefined;
             controller.ongResource = new OngResource();
+            controller.user = new UserResource();
 
             controller.isSectionVisible = isSectionVisible;
             controller.registerOng = registerOng;
@@ -33,7 +36,7 @@
         }
 
         function submitFormLogin() {
-            var path, isPasswordValid, isEmailAvailable;
+            var path, isPasswordValid, isEmailAvailable, ongId;
 
             path = $location.path();
 
@@ -43,18 +46,24 @@
 
                 if (isPasswordValid && isEmailAvailable) {
                     controller.ongResource.name = controller.ong;
-                    controller.ongResource.$save().then(function(){
-                        // salvar usuário
+                    controller.ongResource.$save().then(function(response) {
+                        saveFirstUser(response.id);
                     });
                 }
             }
             else if (path === '/login') {
-
+                UserSession.login(controller.email, controller.password);
             }
         }
 
-        function saveFirstUser() {
-
+        function saveFirstUser(ongId) {
+            var user = new UserResource();
+            user.ong_id = ongId;
+            user.email = controller.email;
+            user.password = controller.password;
+            user.$save().then(function(response) {
+                $location.path('/home/' + ongId);
+            });
         }
 
         // Retorna se a seção (login, signup...) deve estar visível

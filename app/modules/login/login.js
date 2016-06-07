@@ -1,10 +1,26 @@
 /* globals angular:false */
 (function(angular) {
-    'use strict';
+    'use strict'
 
     angular
-        .module('expresso.modules.login')
+        .module('expresso.modules.login', [])
+        .config(config)
         .controller('LoginCtrl', LoginCtrl);
+
+    function config ($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise("404");
+
+        $stateProvider
+            .state('login', {
+                url: "/login",
+                templateUrl: "/app/modules/login/login.html"
+            })
+
+            .state('signup', {
+                url: "/signup",
+                templateUrl: "/app/modules/login/login.html"
+            });
+    }
 
     function LoginCtrl($scope, $location) {
         var controller = this;
@@ -22,4 +38,5 @@
             return path;
         }
     }
+
 })(angular);

@@ -35,7 +35,7 @@
             </div>
         </md-input-container>
         <md-input-container class="md-block">
-            <md-button class="md-raised md-primary">Entrar</md-button>
+            <md-button class="md-raised md-primary" type="submit">Entrar</md-button>
         </md-input-container>
     </article>
 
@@ -51,7 +51,7 @@
             </div>
         </md-input-container>
         <md-input-container class="md-block">
-            <label>E-mail*</label>
+            <label>Usuário (seu email)*</label>
             <input type="email" name="email" ng-model="controller.email" required>
             <div ng-messages="loginForm.email.$error">
                 <div ng-message="required">
@@ -65,9 +65,9 @@
         <md-input-container class="md-block">
             <label>Senha*</label>
             <input type="password" name="password" ng-model="controller.password" minlength="6" required>
-            <div class="login-card__hint">
+            <!-- <div class="login-card__hint">
                 (A senha deve conter pelo menos 6 caracteres)
-            </div>
+            </div> -->
             <div ng-messages="loginForm.password.$error">
                 <div ng-message="required">
                     Este campo é obrigatório
