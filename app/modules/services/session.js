@@ -11,7 +11,7 @@
         // UserSession.create();
     }
 
-    function UserSession($http, $location, UserResource) {
+    function UserSession($http, $location, $cookies, $rootScope, UserResource) {
         var user = {}, ong = {};
 
         return {
@@ -27,8 +27,13 @@
                     user.id = response.data.id;
                     user.name = response.data.name;
                     user.email = response.data.email;
-                    user.isAuthenticated = response.data.is_authenticated;
+                    user.is_authenticated = response.data.is_authenticated;
                     ong.id = response.data.ong_id;
+
+                    $rootScope.globals.currentUser = {};
+                    $rootScope.globals.currentUser = user;
+                    $cookies.putObject('globals', $rootScope.globals);
+
                     $location.path('/home/' + ong.id);
                 }, function errorCallback(response) {
                     console.log("Erro ao realizar login. Resposta do servidor: " + response);
@@ -42,6 +47,7 @@
                 }).then(function successCallback(response) {
                     user = {};
                     ong = {};
+                    $cookies.remove('globals');
                     $location.path('/login');
                 }, function errorCallback(response) {
                     console.log("Erro ao realizar logout. Resposta do servidor: " + response);
@@ -52,13 +58,17 @@
                 return user;
             },
 
+            setUser : function(newUser) {
+                user = newUser;
+            },
+
             getOng : function() {
                 return ong;
             },
 
             isAuthenticated : function () {
                 if (!_.isEmpty(user)) {
-                    return user.isAuthenticated;
+                    return user.is_authenticated;
                 }
                 return false;
             }

@@ -7,6 +7,7 @@
         'ngMaterial',
         'ngMessages',
         'ngResource',
+        'ngCookies',
         'angular-google-analytics',
         'expresso.components',
         'expresso.modules'
@@ -15,6 +16,7 @@
     angular
         .module('MyApp', dependencies)
         .config(config)
+        .run(checkUserAuthentication)
         .run(analytics)
 
 
@@ -23,22 +25,50 @@
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
-        setAngularMaterial($mdThemingProvider);
+        _setAngularMaterial($mdThemingProvider);
 
         // Configura o Google Analytics
-        setGoogleAnalytics(AnalyticsProvider);
+        _setGoogleAnalytics(AnalyticsProvider);
     }
 
-    function setAngularMaterial($mdThemingProvider) {
+    function _setAngularMaterial($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('amber');
     }
 
-    function setGoogleAnalytics(AnalyticsProvider) {
+    function _setGoogleAnalytics(AnalyticsProvider) {
         AnalyticsProvider
             .setAccount('UA-67297111-2')
             .setPageEvent('$stateChangeSuccess');
+    }
+
+    function checkUserAuthentication($rootScope, $location, $cookies, $http, UserSession) {
+        var url;
+
+        $rootScope.globals = $cookies.getObject('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            url = 'http://localhost:5000/user/' + $rootScope.globals.currentUser.id;
+
+            $http.get(url)
+                .success(function successCallback(data) {
+                    UserSession.setUser(data);
+
+                    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                        var path, publicPages, isRestrictedPage, isAuthenticated;
+                        path = $location.path();
+                        publicPages = ['', '/login', '/signup'];
+                        isRestrictedPage = _.indexOf(publicPages, path) === -1;
+                        isAuthenticated = UserSession.isAuthenticated();
+                        if (isRestrictedPage && !isAuthenticated) {
+                            $location.path('/login');
+                        }
+                    });
+                })
+                .error(function errorCallback(response) {
+                    console.log("Erro ao recuperar usuário logado. Resposta do servidor: " + response);
+                });
+        }
     }
 
     function analytics(Analytics) {}
@@ -152,9 +182,6 @@
                 // controller.toggleEdit = toggleEdit;
                 controller.setCurrentTab = setCurrentTab;
                 controller.isCurrentTab = isCurrentTab;
-
-                console.log('getUser: ')
-                console.log(UserSession.getUser());
             }
 
             // TASK
@@ -343,6 +370,7 @@
                     controller.ongResource.name = controller.ong;
                     controller.ongResource.$save().then(function(response) {
                         saveFirstUser(response.id);
+                        UserSession.login(controller.email, controller.password);
                     });
                 }
             }
@@ -357,6 +385,7 @@
             user.email = controller.email;
             user.password = controller.password;
             user.$save().then(function(response) {
+
                 $location.path('/home/' + ongId);
             });
         }
@@ -491,7 +520,7 @@
         // UserSession.create();
     }
 
-    function UserSession($http, $location, UserResource) {
+    function UserSession($http, $location, $cookies, $rootScope, UserResource) {
         var user = {}, ong = {};
 
         return {
@@ -507,8 +536,13 @@
                     user.id = response.data.id;
                     user.name = response.data.name;
                     user.email = response.data.email;
-                    user.isAuthenticated = response.data.is_authenticated;
+                    user.is_authenticated = response.data.is_authenticated;
                     ong.id = response.data.ong_id;
+
+                    $rootScope.globals.currentUser = {};
+                    $rootScope.globals.currentUser = user;
+                    $cookies.putObject('globals', $rootScope.globals);
+
                     $location.path('/home/' + ong.id);
                 }, function errorCallback(response) {
                     console.log("Erro ao realizar login. Resposta do servidor: " + response);
@@ -522,6 +556,7 @@
                 }).then(function successCallback(response) {
                     user = {};
                     ong = {};
+                    $cookies.remove('globals');
                     $location.path('/login');
                 }, function errorCallback(response) {
                     console.log("Erro ao realizar logout. Resposta do servidor: " + response);
@@ -532,13 +567,17 @@
                 return user;
             },
 
+            setUser : function(newUser) {
+                user = newUser;
+            },
+
             getOng : function() {
                 return ong;
             },
 
             isAuthenticated : function () {
                 if (!_.isEmpty(user)) {
-                    return user.isAuthenticated;
+                    return user.is_authenticated;
                 }
                 return false;
             }

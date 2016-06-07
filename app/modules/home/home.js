@@ -36,9 +36,6 @@
                 // controller.toggleEdit = toggleEdit;
                 controller.setCurrentTab = setCurrentTab;
                 controller.isCurrentTab = isCurrentTab;
-
-                console.log('getUser: ')
-                console.log(UserSession.getUser());
             }
 
             // TASK
