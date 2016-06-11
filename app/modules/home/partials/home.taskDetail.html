@@ -1,0 +1,102 @@
+<div>
+    <!-- EDIÇÃO -->
+    <div ng-show="isTaskEditing" class="ong-profile__task-detail-edit">
+        <md-input-container class="md-block u-no-margin-top">
+            <label>Título da tarefa</label>
+            <input type="text" name="taskTitle" ng-model="controller.taskTitle">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Status</label>
+            <md-select ng-model="controller.taskStatusSelected">
+                <md-option
+                    ng-repeat="option in controller.taskStatusOptions"
+                    value="{{ option.label }}">
+                    {{ option.label }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Recorrência</label>
+            <md-select ng-model="controller.taskRecurrenceSelected">
+                <md-option
+                    ng-repeat="option in controller.taskRecurrenceOptions"
+                    value="{{ option.label }}">
+                    {{ option.label }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Tags</label>
+            <md-chips
+                ng-model="controller.taskTags"
+                readonly="false"
+                placeholder="Digite e tecle 'Enter'"
+                delete-button-label="Remover palavra chave"
+                delete-hint="Pressione deletar para remover a palavra chave"
+                secondary-placeholder="+Adicionar">
+            </md-chips>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Descrição</label>
+            <textarea ng-model="controller.taskDescription" rows="60" md-select-on-focus></textarea>
+        </md-input-container>
+    </div>
+    <!-- FIM EDIÇÃO  -->
+
+    <!-- VISUALIZAÇÃO -->
+    <div ng-show="!isTaskEditing" class="ong-profile__task-detail">
+        <div class="ong-profile__main-toolbar">
+            <md-button
+                ui-sref="home.tasksList"
+                md-no-ink
+                class="md-primary u-float-left">
+                <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg"></md-icon>
+                Voltar
+            </md-button>
+            <md-button
+                ng-click="controller.editTask()"
+                md-no-ink
+                class="md-primary u-float-right">
+                <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+                Editar
+            </md-button>
+        </div>
+
+        <div class="ong-profile__task-detail-title">
+            {{ controller.task.title }}
+            <!-- Desenvolver Website da instituição -->
+        </div>
+
+        <div class="ong-profile__task-detail-header">
+            <table class="ong-profile__task-detail-meta">
+                <tr>
+                    <th>Criado em:</th>
+                    <td>{{ controller.task.createdAt | date: "dd/MM/yyyy 'às' hh:mm" }}</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>{{ controller.task.updatedAt | date: "dd/MM/yyyy 'às' hh:mm"}}</td>
+                </tr>
+                <tr>
+                    <th>Palavras chaves:</th>
+                    <td></td>
+                    <!-- <td>{{ controller.task.tags || 'Nenhuma palavra chave cadastrada'}}</td> -->
+                    <!-- <td>Computação, Programação, Desenvolvimento de Software, Software, Website, Site, Design, Front-end</td> -->
+                </tr>
+            </table>
+        </div>
+
+        <div class="ong-profile__task-detail-section">
+            <h4 class="ong-profile__task-detail-section-title">Descrição da tarefa</h4>
+
+            <pre>
+                {{ controller.task.description }}
+            </pre>
+        </div>
+
+    </div>
+    <!-- FIM VISUALIZAÇÃO -->
+</div>

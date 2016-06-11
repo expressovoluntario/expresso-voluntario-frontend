@@ -1,0 +1,58 @@
+<div>
+    <!-- TOOLBAR -->
+    <div class="ong-profile__main-toolbar">
+        <md-button
+            ng-show="controller.isAboutEditing"
+            ng-click="controller.saveAboutInfo()"
+            md-no-ink
+            class="md-primary u-float-right">
+                <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+                Salvar
+        </md-button>
+
+        <md-button
+            ng-show="!controller.isAboutEditing"
+            ng-click="controller.editAboutInfo()"
+            ng-show="controller.ong.description"
+            md-no-ink
+            class="md-primary u-float-right">
+                <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+                Editar
+        </md-button>
+    </div>
+    <!-- FIM TOOLBAR -->
+
+    <!-- VISUALIZAÇÃO -->
+    <div ng-show="!controller.isAboutEditing" class="ong-profile__about">
+        <div class="ong-profile__about-title">
+            {{ controller.ong.name }}
+        </div>
+
+        <pre class="pre-keep-paragraph">
+            {{ controller.ong.description }}
+        </pre>
+
+        <div ng-hide="controller.ong.description" class="ong-profile__about-empty-case">
+            <md-button
+                ng-click="controller.editAboutInfo()"
+                md-no-ink
+                class="md-primary">
+                    <md-icon md-svg-icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon>
+                    Adicione aqui uma descrição sobre sua instituição
+            </md-button>
+        </div>
+    </div>
+    <!-- FIM VISUALIZAÇÃO -->
+
+    <!-- EDIÇÃO -->
+    <div ng-show="controller.isAboutEditing" class="ong-profile__about-edit">
+        <div class="ong-profile__about-title">
+            {{ controller.ong.name }}
+        </div>
+        <md-input-container class="md-block">
+            <label>Adicione uma descrição para sua instituição</label>
+            <textarea ng-model="controller.ong.description" rows="60" md-select-on-focus></textarea>
+        </md-input-container>
+    </div>
+    <!-- FIM EDIÇÃO -->
+</div>

@@ -43,32 +43,72 @@
             .setPageEvent('$stateChangeSuccess');
     }
 
+    // -> verificar se o usuário está logado. Registrar um evento de mudança de rota pra que
+    // toda hora que ele mudar de url verificar se está logado
+    // como?
+    //   verifica se o usuário está no cookie, se estiver é só pegar os atributos do cookie
+    // se não estiver setar como is_authenticated = false
     function checkUserAuthentication($rootScope, $location, $cookies, $http, UserSession) {
-        var url;
+        var url, mock;
 
         $rootScope.globals = $cookies.getObject('globals') || {};
         if ($rootScope.globals.currentUser) {
+            mock = {};
+            mock.is_authenticated = true;
+            UserSession.setUser(mock);
+
             url = 'http://localhost:5000/user/' + $rootScope.globals.currentUser.id;
 
             $http.get(url)
                 .success(function successCallback(data) {
                     UserSession.setUser(data);
-
-                    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-                        var path, publicPages, isRestrictedPage, isAuthenticated;
-                        path = $location.path();
-                        publicPages = ['', '/login', '/signup'];
-                        isRestrictedPage = _.indexOf(publicPages, path) === -1;
-                        isAuthenticated = UserSession.isAuthenticated();
-                        if (isRestrictedPage && !isAuthenticated) {
-                            $location.path('/login');
-                        }
-                    });
                 })
                 .error(function errorCallback(response) {
                     console.log("Erro ao recuperar usuário logado. Resposta do servidor: " + response);
                 });
+
+        } else {
+            mock = {};
+            mock.is_authenticated = false;
+            UserSession.setUser(mock);
         }
+
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var path, publicPages, isRestrictedPage, isAuthenticated;
+            path = $location.path();
+            publicPages = ['', '/login', '/signup'];
+            isRestrictedPage = _.indexOf(publicPages, path) === -1;
+            isAuthenticated = UserSession.isAuthenticated();
+            if (isRestrictedPage && !isAuthenticated) {
+                $location.path('/login');
+            }
+        });
+
+
+
+        // $rootScope.globals = $cookies.getObject('globals') || {};
+        // if ($rootScope.globals.currentUser) {
+        //     url = 'http://localhost:5000/user/' + $rootScope.globals.currentUser.id;
+        //
+        //     $http.get(url)
+        //         .success(function successCallback(data) {
+        //             UserSession.setUser(data);
+
+                    // $rootScope.$on('$locationChangeStart', function (event, next, current) {
+                    //     var path, publicPages, isRestrictedPage, isAuthenticated;
+                    //     path = $location.path();
+                    //     publicPages = ['', '/login', '/signup'];
+                    //     isRestrictedPage = _.indexOf(publicPages, path) === -1;
+                    //     isAuthenticated = UserSession.isAuthenticated();
+                    //     if (isRestrictedPage && !isAuthenticated) {
+                    //         $location.path('/login');
+                    //     }
+                    // });
+                // })
+                // .error(function errorCallback(response) {
+                //     console.log("Erro ao recuperar usuário logado. Resposta do servidor: " + response);
+                // });
+        // }
     }
 
     function analytics(Analytics) {}

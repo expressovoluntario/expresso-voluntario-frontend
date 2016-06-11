@@ -22,12 +22,19 @@
             });
     }
 
-    function LoginCtrl($scope, $location) {
+    function LoginCtrl($scope, $location, UserSession) {
         var controller = this;
         init();
 
         function init() {
             controller.getRole = getRole;
+            _redirectHomeIfLogged()
+        }
+
+        function _redirectHomeIfLogged() {
+            if (UserSession.isAuthenticated()) {
+                $location.path('/inicio/tarefas');
+            }
         }
 
         // Retorna qual a função do card (signup, login...) de acordo com a URL

@@ -1,0 +1,42 @@
+<div>
+    <!-- TOOLBAR -->
+    <div class="ong-profile__main-toolbar">
+        <md-button
+            ui-sref="home.newTask"
+            md-no-ink
+            class="md-primary u-float-right">
+                <md-icon md-svg-icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon>
+                Adicionar tarefa
+        </md-button>
+    </div>
+    <!-- FIM TOOLBAR -->
+
+    <!-- SEARCH -->
+    <div class="ong-profile__main-search">
+        <div class="ong-profile__main-search-control">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Pesquisar tarefa</label>
+                <input ng-model="controller.search">
+            </md-input-container>
+        </div>
+    </div>
+    <!-- FIM SEARCH  -->
+
+    <!-- TAREFAS -->
+    <div class="ong-profile__main-tasks">
+        <ul>
+            <li
+                ng-repeat="task in controller.ong.tasks track by $index"
+                ui-sref="home.taskDetail({id : task.id})"
+                class="ong-profile__task">
+                    <div class="ong-profile__task-title">
+                        {{ task.title }}
+                    </div>
+                    <div class="ong-profile__task-status">
+                        <div class="badge-status">{{ task.status }}</div>
+                    </div>
+            </li>
+        </ul>
+    </div>
+    <!-- FIM TAREFAS -->
+</div>

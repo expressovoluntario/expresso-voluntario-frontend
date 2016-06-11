@@ -63,8 +63,7 @@
             user.email = controller.email;
             user.password = controller.password;
             user.$save().then(function(response) {
-
-                $location.path('/home/' + ongId);
+                $location.path('/inicio/tarefas');
             });
         }
 

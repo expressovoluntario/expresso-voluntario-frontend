@@ -10,6 +10,7 @@
             'expresso.modules.ong',
             'expresso.modules.services',
             'expresso.modules.sharedTemplates',
+            'expresso.modules.task',
             'expresso.modules.user'
         ]);
 

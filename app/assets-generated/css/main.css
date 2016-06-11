@@ -103,7 +103,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 .u-no-padding-top {
-  padding: 0;
+  padding-top: 0;
 }
 
 .u-padding-top-1 {
@@ -131,7 +131,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 .u-no-padding-bottom {
-  padding: 0;
+  padding-bottom: 0;
 }
 
 .u-padding-bottom-1 {
@@ -159,7 +159,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 .u-no-padding-left {
-  padding: 0;
+  padding-left: 0 !important;
 }
 
 .u-padding-left-1 {
@@ -187,7 +187,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 .u-no-padding-right {
-  padding: 0;
+  padding-right: 0;
 }
 
 .u-padding-right-1 {
@@ -432,6 +432,7 @@ b {
   top: 0;
   height: 50px;
   background-color: #1976d2;
+  z-index: 10;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
