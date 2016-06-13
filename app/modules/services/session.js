@@ -56,6 +56,7 @@
                         promiseOng.then(
                             function ongSuccessCallback(response) {
                                 ong = response.data;
+                                ong.tasks = JSON.parse(ong.tasks);
                                 $location.path('/inicio/tarefas');
                             },
 

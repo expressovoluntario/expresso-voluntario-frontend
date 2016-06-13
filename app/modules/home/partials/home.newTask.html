@@ -51,7 +51,7 @@
         <md-input-container class="md-block">
             <label>Tags</label>
             <md-chips
-                ng-model="controller.taskTags"
+                ng-model="controller.newTask.tags"
                 readonly="false"
                 placeholder="Digite e tecle 'Enter'"
                 delete-button-label="Remover palavra chave"
@@ -64,6 +64,7 @@
             <label>Descrição</label>
             <textarea
                 ng-model="controller.newTask.description"
+                class="u-min-height-150"
                 rows="60"
                 md-select-on-focus>
             </textarea>

@@ -16,7 +16,7 @@
             </md-select>
         </md-input-container>
 
-        <md-input-container class="md-block">
+        <!-- <md-input-container class="md-block">
             <label>Recorrência</label>
             <md-select ng-model="controller.taskRecurrenceSelected">
                 <md-option
@@ -25,7 +25,7 @@
                     {{ option.label }}
                 </md-option>
             </md-select>
-        </md-input-container>
+        </md-input-container> -->
 
         <md-input-container class="md-block">
             <label>Tags</label>
@@ -41,7 +41,12 @@
 
         <md-input-container class="md-block">
             <label>Descrição</label>
-            <textarea ng-model="controller.taskDescription" rows="60" md-select-on-focus></textarea>
+            <textarea
+                ng-model="controller.taskDescription"
+                class="u-min-height-150"
+                rows="60"
+                md-select-on-focus>
+            </textarea>
         </md-input-container>
     </div>
     <!-- FIM EDIÇÃO  -->
@@ -82,9 +87,7 @@
                 </tr>
                 <tr>
                     <th>Palavras chaves:</th>
-                    <td></td>
-                    <!-- <td>{{ controller.task.tags || 'Nenhuma palavra chave cadastrada'}}</td> -->
-                    <!-- <td>Computação, Programação, Desenvolvimento de Software, Software, Website, Site, Design, Front-end</td> -->
+                    <td> {{ controller.getTags() }}</td>
                 </tr>
             </table>
         </div>

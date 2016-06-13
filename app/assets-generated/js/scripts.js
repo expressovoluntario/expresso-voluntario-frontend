@@ -238,11 +238,15 @@
                 controller.isAboutEditing = false;
                 controller.currentTab = 'tasks';
                 controller.ong = _loadOng();
+                controller.taskTags = [];
 
                 controller.newTask = {};
+                controller.newTask.tags = [];
                 controller.newTask.title = '';
                 controller.newTask.description = '';
                 controller.newTask.status = '';
+
+                controller.searchTasks = searchTasks;
 
 
 
@@ -258,6 +262,7 @@
                 controller.getAddress = getAddress;
                 controller.getPhones = getPhones;
                 controller.getEmail = getEmail;
+                controller.isTaskListEmpty = isTaskListEmpty;
             }
 
             //////////////////////
@@ -370,6 +375,7 @@
                 newTask = new TaskResource();
                 newTask.title = controller.newTask.title;
                 newTask.description = controller.newTask.description;
+                newTask.tags = controller.newTask.tags;
                 // newTask.status = controller.newTask.status;
                 newTask.ong_id = controller.ong.id;
                 newTask.$save();
@@ -418,6 +424,22 @@
                 }
             }
 
+            function searchTasks(tag) {
+                var url;
+
+                url = 'http://localhost:5000/task?location='+ tag;
+                $http.get(url).then(function(response) {
+                    controller.testetasks = response.data;
+                });
+            }
+
+            function isTaskListEmpty() {
+                if(controller.ong.tasks && controller.ong.tasks.length === 0) {
+                    return true;
+                }
+
+                return false;
+            }
 
             //////////////////////
             // FUNÇÕES PRIVADAS
@@ -498,12 +520,13 @@
                 // FUNÇÕES
                 controller.editTask = editTask;
                 controller.saveTask = saveTask;
+                controller.getTags = getTags;
 
                 _loadTask();
             }
 
             /////////////////////////
-            // FUNÇÕES PRIVADAS
+            // FUNÇÕES PÚBLICAS
             /////////////////////////
 
             function editTask() {
@@ -512,6 +535,23 @@
 
             function saveTask() {
                 controller.isTaskEditing = false;
+            }
+
+            function getTags() {
+                var output;
+
+                if (controller.task) {
+                    if (controller.task.tags && controller.task.tags.length === 0) {
+                        return 'Nenhuma palavra chave cadastrada';
+                    }
+
+                    output = '';
+                    controller.task.tags.forEach(function(tag) {
+                        output += tag + ', '
+                    });
+                    output = output.slice(0, -2);
+                    return output;
+                }
             }
 
             /////////////////////////
@@ -594,92 +634,6 @@
         function setFormState(state) {
             $scope.formState = state;
         }
-    }
-
-})(angular);
-
-/* globals angular:false */
-(function(angular) {
-    'use strict'
-
-    angular
-        .module('expresso.modules.ong', [])
-        .config(config)
-        .controller('OngCtrl', OngCtrl);
-
-        function config ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise("404");
-
-            $stateProvider
-                .state('profile', {
-                    url: "/profile",
-                    templateUrl: "/app/modules/ong/ong.html"
-                });
-        }
-
-        function OngCtrl() {
-            var controller = this;
-            init();
-
-            function init() {
-                // controller.isEditing = false;
-                controller.currentTab = 'tasks';
-                controller.taskTags = [];
-                controller.taskStatus = getStatusOptions();
-                controller.taskStatusSelected = null;
-                controller.taskRecurrence = getRecurrenceOptions();
-                controller.taskRecurrenceSelected = null;
-                controller.taskDescription = null;
-
-                // controller.toggleEdit = toggleEdit;
-                controller.setCurrentTab = setCurrentTab;
-                controller.isCurrentTab = isCurrentTab;
-            }
-
-            // TASK
-            function getRecurrenceOptions() {
-                var options = ['única', 'recorrente'];
-                options = options.map(function(option) {
-                    return { label : option };
-                });
-                return options;
-            }
-
-            // TASK
-            function getStatusOptions() {
-                var options = ['aberto', 'concluído', 'andamento'];
-                options = options.map(function(option) {
-                    return { label : option };
-                });
-                return options;
-            }
-
-
-            function setCurrentTab(tab) {
-                controller.currentTab = tab;
-            }
-
-            function isCurrentTab(tab) {
-                return controller.currentTab === tab;
-            }
-        }
-
-})(angular);
-
-/* globals angular:false */
-(function (angular) {
-    'use strict';
-
-    angular
-        .module('expresso.modules.ong')
-        .factory('OngResource', OngResource);
-
-    function OngResource($resource) {
-        return $resource('http://localhost:5000/ong/:_id', {'_id' : '@_id'}, {
-            'update' : {
-                'method' : 'PUT'
-            }
-        });
     }
 
 })(angular);
@@ -835,6 +789,92 @@
 })(angular);
 
 /* globals angular:false */
+(function(angular) {
+    'use strict'
+
+    angular
+        .module('expresso.modules.ong', [])
+        .config(config)
+        .controller('OngCtrl', OngCtrl);
+
+        function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
+
+            $stateProvider
+                .state('profile', {
+                    url: "/profile",
+                    templateUrl: "/app/modules/ong/ong.html"
+                });
+        }
+
+        function OngCtrl() {
+            var controller = this;
+            init();
+
+            function init() {
+                // controller.isEditing = false;
+                controller.currentTab = 'tasks';
+                controller.taskTags = [];
+                controller.taskStatus = getStatusOptions();
+                controller.taskStatusSelected = null;
+                controller.taskRecurrence = getRecurrenceOptions();
+                controller.taskRecurrenceSelected = null;
+                controller.taskDescription = null;
+
+                // controller.toggleEdit = toggleEdit;
+                controller.setCurrentTab = setCurrentTab;
+                controller.isCurrentTab = isCurrentTab;
+            }
+
+            // TASK
+            function getRecurrenceOptions() {
+                var options = ['única', 'recorrente'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+            // TASK
+            function getStatusOptions() {
+                var options = ['aberto', 'concluído', 'andamento'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+
+
+            function setCurrentTab(tab) {
+                controller.currentTab = tab;
+            }
+
+            function isCurrentTab(tab) {
+                return controller.currentTab === tab;
+            }
+        }
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.modules.ong')
+        .factory('OngResource', OngResource);
+
+    function OngResource($resource) {
+        return $resource('http://localhost:5000/ong/:_id', {'_id' : '@_id'}, {
+            'update' : {
+                'method' : 'PUT'
+            }
+        });
+    }
+
+})(angular);
+
+/* globals angular:false */
 (function (angular) {
     'use strict';
 
@@ -892,6 +932,7 @@
                         promiseOng.then(
                             function ongSuccessCallback(response) {
                                 ong = response.data;
+                                ong.tasks = JSON.parse(ong.tasks);
                                 $location.path('/inicio/tarefas');
                             },
 

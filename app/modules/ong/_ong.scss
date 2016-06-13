@@ -1,7 +1,10 @@
 .ong-profile__contact-wrapper {
     padding: $SPACING_1;
     border: 1px solid $DIVIDER_COLOR;
-    border-top: 2px solid $ACCENT_COLOR;
+    border-top: 3px solid $ACCENT_COLOR;
+    border-radius: 3px;
+    background-color: #fff;
+    @include m-box-shadow(1);
 }
 
     .ong-profile__logo {
@@ -65,6 +68,8 @@
     .ong-profile__main-body {
         border: 1px solid $DIVIDER_COLOR;
         border-top: none;
+        background-color: #fff;
+        @include m-box-shadow(1);
     }
 
     .ong-profile__main-tab {
@@ -72,6 +77,7 @@
         padding: 15px 25px;
         font-size: 16px;
         color: #bbb;
+        background-color: #efefef;
         cursor: pointer;
 
         &:hover {
@@ -82,9 +88,10 @@
             margin-bottom: -1px;
             border-left: 1px solid $DIVIDER_COLOR;
             border-right: 1px solid $DIVIDER_COLOR;
-            border-top: 2px solid $ACCENT_COLOR;
+            border-top: 3px solid $ACCENT_COLOR;
             border-bottom: 1px solid #fff;
             color: $PRIMARY_TEXT_COLOR;
+            background-color: #fff;
         }
     }
 

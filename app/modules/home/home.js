@@ -51,11 +51,15 @@
                 controller.isAboutEditing = false;
                 controller.currentTab = 'tasks';
                 controller.ong = _loadOng();
+                controller.taskTags = [];
 
                 controller.newTask = {};
+                controller.newTask.tags = [];
                 controller.newTask.title = '';
                 controller.newTask.description = '';
                 controller.newTask.status = '';
+
+                controller.searchTasks = searchTasks;
 
 
 
@@ -71,6 +75,7 @@
                 controller.getAddress = getAddress;
                 controller.getPhones = getPhones;
                 controller.getEmail = getEmail;
+                controller.isTaskListEmpty = isTaskListEmpty;
             }
 
             //////////////////////
@@ -183,6 +188,7 @@
                 newTask = new TaskResource();
                 newTask.title = controller.newTask.title;
                 newTask.description = controller.newTask.description;
+                newTask.tags = controller.newTask.tags;
                 // newTask.status = controller.newTask.status;
                 newTask.ong_id = controller.ong.id;
                 newTask.$save();
@@ -231,6 +237,22 @@
                 }
             }
 
+            function searchTasks(tag) {
+                var url;
+
+                url = 'http://localhost:5000/task?location='+ tag;
+                $http.get(url).then(function(response) {
+                    controller.testetasks = response.data;
+                });
+            }
+
+            function isTaskListEmpty() {
+                if(controller.ong.tasks && controller.ong.tasks.length === 0) {
+                    return true;
+                }
+
+                return false;
+            }
 
             //////////////////////
             // FUNÇÕES PRIVADAS
@@ -311,12 +333,13 @@
                 // FUNÇÕES
                 controller.editTask = editTask;
                 controller.saveTask = saveTask;
+                controller.getTags = getTags;
 
                 _loadTask();
             }
 
             /////////////////////////
-            // FUNÇÕES PRIVADAS
+            // FUNÇÕES PÚBLICAS
             /////////////////////////
 
             function editTask() {
@@ -325,6 +348,23 @@
 
             function saveTask() {
                 controller.isTaskEditing = false;
+            }
+
+            function getTags() {
+                var output;
+
+                if (controller.task) {
+                    if (controller.task.tags && controller.task.tags.length === 0) {
+                        return 'Nenhuma palavra chave cadastrada';
+                    }
+
+                    output = '';
+                    controller.task.tags.forEach(function(tag) {
+                        output += tag + ', '
+                    });
+                    output = output.slice(0, -2);
+                    return output;
+                }
             }
 
             /////////////////////////

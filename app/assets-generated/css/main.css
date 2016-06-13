@@ -362,6 +362,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   float: left;
 }
 
+.u-text-align {
+  text-align: center;
+}
+
+.u-min-height-150 {
+  min-height: 150px !important;
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -602,7 +610,10 @@ b {
 .ong-profile__contact-wrapper {
   padding: 8px;
   border: 1px solid #ddd;
-  border-top: 2px solid #ffc107;
+  border-top: 3px solid #ffc107;
+  border-radius: 3px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .ong-profile__logo {
@@ -665,6 +676,8 @@ b {
 .ong-profile__main-body {
   border: 1px solid #ddd;
   border-top: none;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .ong-profile__main-tab {
@@ -672,6 +685,7 @@ b {
   padding: 15px 25px;
   font-size: 16px;
   color: #bbb;
+  background-color: #efefef;
   cursor: pointer;
 }
 .ong-profile__main-tab:hover {
@@ -681,9 +695,10 @@ b {
   margin-bottom: -1px;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  border-top: 2px solid #ffc107;
+  border-top: 3px solid #ffc107;
   border-bottom: 1px solid #fff;
   color: #555;
+  background-color: #fff;
 }
 
 .ong-profile__main-search {

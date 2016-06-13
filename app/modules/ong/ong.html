@@ -197,7 +197,12 @@
 
                         <md-input-container class="md-block">
                             <label>Descrição</label>
-                            <textarea ng-model="controller.taskDescription" rows="60" md-select-on-focus></textarea>
+                            <textarea
+                                ng-model="controller.taskDescription"
+                                class="u-min-height-150"
+                                rows="60"
+                                md-select-on-focus>
+                            </textarea>
                         </md-input-container>
                     </div>
                     <!-- FIM CREATE/EDIT TASK  -->
@@ -281,7 +286,12 @@
                     <div ng-show="false" class="ong-profile__about-edit">
                         <md-input-container class="md-block u-no-margin">
                             <label>Adicione uma descrição para sua instituição</label>
-                            <textarea ng-model="controller.taskDescription" rows="60" md-select-on-focus></textarea>
+                            <textarea
+                                ng-model="controller.taskDescription"
+                                class="u-min-height-150"
+                                rows="60"
+                                md-select-on-focus>
+                            </textarea>
                         </md-input-container>
                     </div>
                     <!-- FIMCREATE/EDIT ABOUT -->
