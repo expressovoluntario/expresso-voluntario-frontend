@@ -2,14 +2,12 @@
     <div class="ong-profile__main-toolbar">
         <md-button
             ui-sref="home.tasksList"
-            md-no-ink
             class="md-primary u-float-left">
             <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg"></md-icon>
             Voltar
         </md-button>
         <md-button
             ng-click="controller.saveNewTask()"
-            md-no-ink
             class="md-primary u-float-right">
             <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
             Salvar
@@ -25,28 +23,6 @@
             <label>Título da tarefa</label>
             <input type="text" name="taskTitle" ng-model="controller.newTask.title">
         </md-input-container>
-
-        <!-- <md-input-container class="md-block">
-            <label>Status</label>
-            <md-select ng-model="controller.newTask.status">
-                <md-option
-                    ng-repeat="option in controller.taskStatusOptions"
-                    value="{{ option.label }}">
-                    {{ option.label }}
-                </md-option>
-            </md-select>
-        </md-input-container> -->
-
-        <!-- <md-input-container class="md-block">
-            <label>Recorrência</label>
-            <md-select ng-model="controller.taskRecurrenceSelected">
-                <md-option
-                    ng-repeat="option in controller.taskRecurrenceOptions"
-                    value="{{ option.label }}">
-                    {{ option.label }}
-                </md-option>
-            </md-select>
-        </md-input-container> -->
 
         <md-input-container class="md-block">
             <label>Tags</label>

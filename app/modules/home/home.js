@@ -6,7 +6,8 @@
         .module('expresso.modules.home', [])
         .config(config)
         .controller('HomeCtrl', HomeCtrl)
-        .controller('TaskDetailCtrl', TaskDetailCtrl);
+        .controller('TaskDetailCtrl', TaskDetailCtrl)
+        .factory('HomeModel', HomeModel);
 
         // CONFIGURAÇÕES DE ROTAS
         function config ($stateProvider, $urlRouterProvider) {
@@ -44,8 +45,6 @@
 
             function init() {
                 // VARIÁVEIS
-                controller.taskStatusOptions = _getStatusOptions();
-                controller.taskStatusSelected = null;
                 controller.taskDescription = null;
                 controller.isContactEditing = false;
                 controller.isAboutEditing = false;
@@ -59,8 +58,8 @@
                 controller.newTask.description = '';
                 controller.newTask.status = '';
 
+                // TESTES
                 controller.searchTasks = searchTasks;
-
 
 
                 // FUNÇÕES
@@ -185,14 +184,25 @@
 
             function saveNewTask() {
                 var newTask;
+
+                if (_.isEmpty(controller.newTask.title) || _.isEmpty(controller.newTask.description)) {
+                    return;
+                }
+
                 newTask = new TaskResource();
                 newTask.title = controller.newTask.title;
                 newTask.description = controller.newTask.description;
                 newTask.tags = controller.newTask.tags;
-                // newTask.status = controller.newTask.status;
                 newTask.ong_id = controller.ong.id;
-                newTask.$save();
+                newTask.$save().then(function(response) {
+                    var url;
+                    url = '/inicio/tarefa/' + response.id;
+                    _loadOng();
+                    $location.path(url);
+                });
+
             }
+
 
             function loadAddressViaCEP(value) {
                 var cep, url, promise;
@@ -254,17 +264,10 @@
                 return false;
             }
 
+
             //////////////////////
             // FUNÇÕES PRIVADAS
             //////////////////////
-
-            function _getStatusOptions() {
-                var options = ['Em aberto', 'Em andamento', 'Concluído'];
-                options = options.map(function(option) {
-                    return { label : option };
-                });
-                return options;
-            }
 
             function _loadOng() {
                 var ong, globals, user;
@@ -309,30 +312,27 @@
                 controller.ong.address.uf = '';
             }
 
-            // function _redirectToTasksList() {
-            //     var path;
-            //     path = $location.path();
-            //
-            //     if (path === '/inicio') {
-            //         $location.path('/inicio/tarefas');
-            //     }
-            // }
+            $rootScope.$on('tasksListChanged', function(event, data) {
+                _loadOng();
+            });
         }
 
-        function TaskDetailCtrl($stateParams, TaskResource) {
+        function TaskDetailCtrl($stateParams, $rootScope, $location, $mdDialog, TaskResource) {
             var controller = this;
             init();
 
             function init() {
                 // VARIÁVEIS
-                controller.task;
-                controller.taskTags = [];
+                controller.task = {};
+                controller.task.tags = [];
                 controller.isTaskEditing = false;
-
+                controller.taskStatusOptions = _getStatusOptions();
 
                 // FUNÇÕES
                 controller.editTask = editTask;
                 controller.saveTask = saveTask;
+                controller.updateTask = updateTask;
+                controller.deleteTask = deleteTask;
                 controller.getTags = getTags;
 
                 _loadTask();
@@ -347,7 +347,39 @@
             }
 
             function saveTask() {
+                _triggerBroadcast();
                 controller.isTaskEditing = false;
+            }
+
+            function updateTask(task) {
+                task.$update(function(response) {
+                    _triggerBroadcast();
+                    controller.isTaskEditing = false;
+                });
+            }
+
+            function deleteTask(ev, task) {
+                var confirm = $mdDialog.confirm()
+                    .title('Deseja excluir esta tarefa?')
+                    .textContent('Esta ação não poderá ser desfeita')
+                    .ariaLabel('(?)')
+                    .targetEvent(ev)
+                    .ok('Excluir')
+                    .cancel('Cancelar');
+
+                $mdDialog.show(confirm).then(function() {
+                    task.$delete().then(function() {
+                        _triggerBroadcast();
+                        $location.path('/inicio/tarefas');
+                    });
+                }, function() {
+                  console.log('cancelado');
+                });
+
+            }
+
+            function _triggerBroadcast() {
+                $rootScope.$broadcast('tasksListChanged');
             }
 
             function getTags() {
@@ -359,10 +391,12 @@
                     }
 
                     output = '';
-                    controller.task.tags.forEach(function(tag) {
-                        output += tag + ', '
-                    });
-                    output = output.slice(0, -2);
+                    if (controller.task.tags) {
+                        controller.task.tags.forEach(function(tag) {
+                            output += tag + ', '
+                        });
+                        output = output.slice(0, -2);
+                    }
                     return output;
                 }
             }
@@ -384,6 +418,20 @@
                     controller.task = task;
                 });
             }
+
+            function _getStatusOptions() {
+                var options = ['Em aberto', 'Em andamento', 'Concluído'];
+                options = options.map(function(option) {
+                    return { label : option };
+                });
+                return options;
+            }
+        }
+
+        function HomeModel() {
+            return {
+
+            };
         }
 
 })(angular);

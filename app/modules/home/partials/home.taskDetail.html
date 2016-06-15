@@ -1,13 +1,43 @@
 <div>
+    <div class="ong-profile__main-toolbar">
+        <md-button
+            ui-sref="home.tasksList"
+            class="md-primary u-float-left">
+            <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg"></md-icon>
+            Voltar
+        </md-button>
+        <md-button
+            ng-show="!controller.isTaskEditing"
+            ng-click="controller.editTask()"
+            class="md-primary u-float-right">
+            <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+            Editar
+        </md-button>
+        <md-button
+        ng-show="!controller.isTaskEditing"
+        ng-click="controller.deleteTask($event, controller.task)"
+        class="md-warn u-float-right">
+            <md-icon md-svg-icon="bower_components/material-design-icons/action/svg/production/ic_delete_24px.svg"></md-icon>
+            Excluir
+        </md-button>
+        <md-button
+            ng-show="controller.isTaskEditing"
+            ng-click="controller.updateTask(controller.task)"
+            class="md-primary u-float-right">
+            <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+            Salvar
+        </md-button>
+    </div>
+
     <!-- EDIÇÃO -->
-    <div ng-show="isTaskEditing" class="ong-profile__task-detail-edit">
+    <div ng-show="controller.isTaskEditing" class="ong-profile__task-detail-edit">
         <md-input-container class="md-block u-no-margin-top">
-            <label>Título da tarefa</label>
-            <input type="text" name="taskTitle" ng-model="controller.taskTitle">
+            <label>Título da tarefa*</label>
+            <input type="text" name="taskTitle" ng-model="controller.task.title" required>
         </md-input-container>
         <md-input-container class="md-block">
             <label>Status</label>
-            <md-select ng-model="controller.taskStatusSelected">
+            <md-select ng-model="controller.task.status">
                 <md-option
                     ng-repeat="option in controller.taskStatusOptions"
                     value="{{ option.label }}">
@@ -16,21 +46,10 @@
             </md-select>
         </md-input-container>
 
-        <!-- <md-input-container class="md-block">
-            <label>Recorrência</label>
-            <md-select ng-model="controller.taskRecurrenceSelected">
-                <md-option
-                    ng-repeat="option in controller.taskRecurrenceOptions"
-                    value="{{ option.label }}">
-                    {{ option.label }}
-                </md-option>
-            </md-select>
-        </md-input-container> -->
-
         <md-input-container class="md-block">
             <label>Tags</label>
             <md-chips
-                ng-model="controller.taskTags"
+                ng-model="controller.task.tags"
                 readonly="false"
                 placeholder="Digite e tecle 'Enter'"
                 delete-button-label="Remover palavra chave"
@@ -40,39 +59,21 @@
         </md-input-container>
 
         <md-input-container class="md-block">
-            <label>Descrição</label>
+            <label>Descrição*</label>
             <textarea
-                ng-model="controller.taskDescription"
+                ng-model="controller.task.description"
                 class="u-min-height-150"
                 rows="60"
-                md-select-on-focus>
+                md-select-on-focus required="">
             </textarea>
         </md-input-container>
     </div>
     <!-- FIM EDIÇÃO  -->
 
     <!-- VISUALIZAÇÃO -->
-    <div ng-show="!isTaskEditing" class="ong-profile__task-detail">
-        <div class="ong-profile__main-toolbar">
-            <md-button
-                ui-sref="home.tasksList"
-                md-no-ink
-                class="md-primary u-float-left">
-                <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg"></md-icon>
-                Voltar
-            </md-button>
-            <md-button
-                ng-click="controller.editTask()"
-                md-no-ink
-                class="md-primary u-float-right">
-                <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
-                Editar
-            </md-button>
-        </div>
-
+    <div ng-show="!controller.isTaskEditing" class="ong-profile__task-detail">
         <div class="ong-profile__task-detail-title">
             {{ controller.task.title }}
-            <!-- Desenvolver Website da instituição -->
         </div>
 
         <div class="ong-profile__task-detail-header">
@@ -83,7 +84,8 @@
                 </tr>
                 <tr>
                     <th>Status:</th>
-                    <td>{{ controller.task.updatedAt | date: "dd/MM/yyyy 'às' hh:mm"}}</td>
+                    <td>{{ controller.task.status }}</td>
+                    <!-- <td>{{ controller.task.updatedAt | date: "dd/MM/yyyy 'às' hh:mm"}}</td> -->
                 </tr>
                 <tr>
                     <th>Palavras chaves:</th>

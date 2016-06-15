@@ -7,7 +7,7 @@
         .factory('TaskResource', TaskResource);
 
     function TaskResource($resource) {
-        return $resource('http://localhost:5000/task/:id', {'_id' : '@_id'}, {
+        return $resource('http://localhost:5000/task/:id', {'id' : '@id'}, {
             'update' : {
                 'method' : 'PUT'
             }

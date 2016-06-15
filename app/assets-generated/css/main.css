@@ -456,6 +456,11 @@ b {
 .expresso-header__logo a {
   color: #fff;
 }
+@media (max-width: 420px) {
+  .expresso-header__logo {
+    font-size: 16px;
+  }
+}
 
 .expresso-menu__menu {
   font-size: 12px;
@@ -476,6 +481,12 @@ b {
   height: 100%;
   margin-left: 16px;
   display: inline-block;
+}
+@media (max-width: 420px) {
+  .expresso-menu__item {
+    margin-left: 8px;
+    font-size: 11px;
+  }
 }
 
 .expresso-menu__icon {

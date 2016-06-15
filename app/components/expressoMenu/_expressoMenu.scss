@@ -18,6 +18,11 @@
     height: 100%;
     margin-left: $SPACING_2;
     display: inline-block;
+
+    @media (max-width: 420px) {
+        margin-left: $SPACING_1;
+        font-size: 11px;
+    }
 }
 
 .expresso-menu__icon {
