@@ -57,45 +57,51 @@
         </div>
     </section>
 
-    <section class="page-home__tasks" style="border-top: 2px solid #e6e6e6">
+    <section class="page-home__search">
+        <expresso-search></expresso-search>
+    </section>
+
+    <section class="page-home__form">
         <div class="expresso-container is-vertical-spacing">
-            <p class="page-home__form-title">Quer acompanhar as novidades do Expresso Voluntário?</p>
-            <p class="u-margin-bottom-4">Cadastre seu e-mail pelo formulário abaixo:</p>
+            <div class="page-home__form-inner">
+                <p class="page-home__form-title">Quer acompanhar as novidades do Expresso Voluntário?</p>
+                <p class="u-margin-bottom-4">Cadastre seu e-mail pelo formulário abaixo:</p>
 
-            <form ng-submit="sendForm()" class="page-home__form-wrapper">
-                <div ng-show="formState === 'new'">
-                    <div class="u-margin-bottom-2 u-margin-top-1">
-                        <label class="label-control">E-mail:</label>
-                        <input ng-model="email" type="text" name="email" required="true">
+                <form ng-submit="sendForm()" class="page-home__form-wrapper">
+                    <div ng-show="formState === 'new'">
+                        <div class="u-margin-bottom-2 u-margin-top-1">
+                            <label class="label-control">E-mail:</label>
+                            <input ng-model="email" type="text" name="email" class="input-form"required="true">
+                        </div>
+                        <div class="u-margin-bottom-3">
+                            <label class="label-control">Eu sou:</label>
+                            <input ng-model="interest" type="radio" name="interesse" value="voluntario" id="radio2" required="true">
+                            <label for="radio2">Voluntário</label>
+                            <input ng-model="interest" type="radio" name="interesse" value="instituicao" id="radio1" required="true">
+                            <label for="radio1">Instituição</label>
+                        </div>
+                        <div>
+                            <md-button class="md-primary md-raised u-no-margin" type="submit">Cadastrar</md-button>
+                        </div>
                     </div>
-                    <div class="u-margin-bottom-3">
-                        <label class="label-control">Eu sou:</label>
-                        <input ng-model="interest" type="radio" name="interesse" value="voluntario" id="radio2" required="true">
-                        <label for="radio2">Voluntário</label>
-                        <input ng-model="interest" type="radio" name="interesse" value="instituicao" id="radio1" required="true">
-                        <label for="radio1">Instituição</label>
+
+                    <div ng-show="formState === 'loading'">
+                        Cadastrando...
                     </div>
-                    <div>
-                        <md-button class="md-primary md-raised u-no-margin" type="submit">Cadastrar</md-button>
+
+                    <div ng-show="formState === 'success'">
+                        Sucesso! Agora é só aguardar as novidades! =)
                     </div>
-                </div>
 
-                <div ng-show="formState === 'loading'">
-                    Cadastrando...
-                </div>
-
-                <div ng-show="formState === 'success'">
-                    Sucesso! Agora é só aguardar as novidades! =)
-                </div>
-
-                <div ng-show="formState === 'error'">
-                    <p class="u-margin-bottom-1">Houve um problema ao cadastrar seu e-mail =(</p>
-                    <p ng-click="setFormState('new')">
-                        Por favor,
-                        <a href="">tente novamente clicando aqui.</a>
-                    </p>
-                </div>
-            </form>
+                    <div ng-show="formState === 'error'">
+                        <p class="u-margin-bottom-1">Houve um problema ao cadastrar seu e-mail =(</p>
+                        <p ng-click="setFormState('new')">
+                            Por favor,
+                            <a href="">tente novamente clicando aqui.</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 </div>
