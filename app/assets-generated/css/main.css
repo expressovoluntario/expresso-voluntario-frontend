@@ -370,6 +370,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   min-height: 150px !important;
 }
 
+.u-overflow-hidden {
+  overflow: hidden;
+}
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
