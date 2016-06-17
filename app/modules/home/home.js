@@ -193,6 +193,7 @@
                 newTask.title = controller.newTask.title;
                 newTask.description = controller.newTask.description;
                 newTask.tags = controller.newTask.tags;
+                newTask.is_remote = controller.newTask.is_remote;
                 newTask.ong_id = controller.ong.id;
                 newTask.$save().then(function(response) {
                     var url;

@@ -45,7 +45,13 @@
                 </md-option>
             </md-select>
         </md-input-container>
-
+        <md-input-container class="md-block">
+            <md-checkbox
+                ng-model="controller.task.is_remote"
+                class="u-margin-top-1">
+                    Esta tarefa pode ser feita remota? {{ controller.task.is_remote ? '(Sim)' : '(Não)' }}
+            </md-checkbox>
+        </md-input-container>
         <md-input-container class="md-block">
             <label>Tags</label>
             <md-chips
@@ -86,6 +92,10 @@
                     <th>Status:</th>
                     <td>{{ controller.task.status }}</td>
                     <!-- <td>{{ controller.task.updatedAt | date: "dd/MM/yyyy 'às' hh:mm"}}</td> -->
+                </tr>
+                <tr>
+                    <th>Remoto:</th>
+                    <td>{{ controller.task.is_remote? 'Sim' : 'Não' }}</td>
                 </tr>
                 <tr>
                     <th>Palavras chaves:</th>

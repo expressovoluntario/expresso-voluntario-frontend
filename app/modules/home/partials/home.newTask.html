@@ -25,6 +25,14 @@
         </md-input-container>
 
         <md-input-container class="md-block">
+            <md-checkbox
+                ng-model="controller.newTask.is_remote"
+                class="u-margin-top-1">
+                    Esta tarefa pode ser feita remota? {{ controller.newTask.is_remote ? '(Sim)' : '(Não)' }}
+            </md-checkbox>
+        </md-input-container>
+
+        <md-input-container class="md-block">
             <label>Tags</label>
             <md-chips
                 ng-model="controller.newTask.tags"
