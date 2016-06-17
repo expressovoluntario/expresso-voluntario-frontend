@@ -1,0 +1,49 @@
+<div>
+    <div class="ong-profile__main-toolbar">
+        <md-button
+            ui-sref="ong.tasksList"
+            class="md-primary u-float-left">
+                <md-icon md-svg-icon="bower_components/material-design-icons/navigation/svg/production/ic_chevron_left_24px.svg"></md-icon>
+                Voltar
+        </md-button>
+    </div>
+
+    <!-- VISUALIZAÇÃO -->
+    <div class="ong-profile__task-detail">
+        <div class="ong-profile__task-detail-title">
+            {{ controller.task.title }}
+        </div>
+
+        <div class="ong-profile__task-detail-header">
+            <table class="ong-profile__task-detail-meta">
+                <tr>
+                    <th>Criado em:</th>
+                    <td>{{ controller.task.createdAt | date: "dd/MM/yyyy 'às' hh:mm" }}</td>
+                </tr>
+                <tr>
+                    <th>Status:</th>
+                    <td>{{ controller.task.status }}</td>
+                    <!-- <td>{{ controller.task.updatedAt | date: "dd/MM/yyyy 'às' hh:mm"}}</td> -->
+                </tr>
+                <tr>
+                    <th>Remoto:</th>
+                    <td>{{ controller.task.is_remote? 'Sim' : 'Não' }}</td>
+                </tr>
+                <tr>
+                    <th>Palavras chaves:</th>
+                    <td> {{ controller.getTags() }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="ong-profile__task-detail-section">
+            <h4 class="ong-profile__task-detail-section-title">Descrição da tarefa</h4>
+
+            <pre>
+                {{ controller.task.description }}
+            </pre>
+        </div>
+
+    </div>
+    <!-- FIM VISUALIZAÇÃO -->
+</div>

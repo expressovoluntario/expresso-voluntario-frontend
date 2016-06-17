@@ -21,7 +21,7 @@
 
 
     function config($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
-        // Não remover as barras da url
+        // Impede que as barras da url sejam removidas
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
@@ -74,10 +74,12 @@
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var path, publicPages, isRestrictedPage, isAuthenticated;
+            var path, regMatchOngsPages, publicPages, isRestrictedPage, isAuthenticated;
             path = $location.path();
             publicPages = ['', '/login', '/signup', '/pesquisar'];
             isRestrictedPage = _.indexOf(publicPages, path) === -1;
+            regMatchOngsPages = /ong\//;
+            isRestrictedPage = isRestrictedPage && !regMatchOngsPages.test(path);
             isAuthenticated = UserSession.isAuthenticated();
             if (isRestrictedPage && !isAuthenticated) {
                 $location.path('/login');

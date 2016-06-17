@@ -496,15 +496,27 @@ b {
 .page-home {
   height: 100%;
 }
-.page-home .page-home__tasks,
-.page-home .page-home__cover {
+.page-home .page-home__form,
+.page-home .page-home__cover,
+.page-home .page-home__search {
   min-height: 600px;
+}
+.page-home .page-home__form,
+.page-home .page-home__search {
+  border-top: 2px solid #e6e6e6;
 }
 .page-home .page-home__cover {
   background-color: #2196f3;
 }
-.page-home .page-home__tasks {
+.page-home .page-home__search {
   background-color: #fff;
+}
+.page-home .page-home__form {
+  background-color: #eee;
+}
+.page-home .page-home__form-inner {
+  max-width: 700px;
+  margin: 0 auto;
 }
 .page-home .page-home__video-side,
 .page-home .page-home__description-side {
@@ -554,7 +566,7 @@ b {
 .page-home .label-control {
   display: block;
 }
-.page-home input[type="text"] {
+.page-home .input-form {
   display: block;
   width: 100%;
   height: 34px;

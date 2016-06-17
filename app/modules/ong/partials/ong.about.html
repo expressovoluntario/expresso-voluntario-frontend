@@ -1,0 +1,19 @@
+<div>
+    <!-- VISUALIZAÇÃO -->
+    <div class="ong-profile__about">
+        <div class="ong-profile__about-title">
+            {{ controller.ong.name }}
+        </div>
+
+        <pre class="pre-keep-paragraph">
+            {{ controller.ong.description }}
+        </pre>
+
+        <div ng-hide="controller.ong.description" class="ong-profile__about-empty-case">
+            <div class="u-text-align-center u-padding-bottom-3">
+                Nenhuma informação adicionada sobre esta instituição
+            </div>
+        </div>
+    </div>
+    <!-- FIM VISUALIZAÇÃO -->
+</div>

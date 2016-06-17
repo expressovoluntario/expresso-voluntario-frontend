@@ -32,6 +32,11 @@
                 controller.searchTask.title = '';
                 controller.searchTask.tag = '';
                 controller.searchTask.location = '';
+                controller.searchTaskRemote = {};
+                controller.searchTaskRemote.tag = '';
+                controller.searchOng = {};
+                controller.searchOng.name = '';
+                controller.searchOng.location = '';
                 controller.currentTab = 'tasks';
                 controller.isFirstQuery= true;
 
@@ -41,6 +46,7 @@
                 controller.isResultEmpty = isResultEmpty;
                 controller.getTaskByTitleAndLocation = getTaskByTitleAndLocation;
                 controller.getTaskByTagAndLocation = getTaskByTagAndLocation;
+                controller.getTaskByTagAndRemote = getTaskByTagAndRemote;
                 controller.getOngsByNameAndLocation = getOngsByNameAndLocation;
             }
 
@@ -84,6 +90,33 @@
 
                 } else if (controller.searchTask.location) {
                     SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                }
+            }
+
+            function getTaskByTagAndRemote() {
+                var params;
+
+                if (controller.searchTaskRemote.tag) {
+                    params = {
+                        data : 'task',
+                        remote : true,
+                        tag : controller.searchTaskRemote.tag
+                    };
+
+                    SearchResource.query(params)
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                } else {
+                    params = {
+                        data : 'task',
+                        remote : true
+                    };
+
+                    SearchResource.query(params)
                         .$promise.then(function(response) {
                             controller.result = response;
                         });
@@ -138,8 +171,6 @@
                     controller.cities = JSON.parse(response.data)
                 });
             }
-
-
         }
 
 })(angular);

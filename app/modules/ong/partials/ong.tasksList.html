@@ -1,0 +1,48 @@
+<div>
+    <!-- TOOLBAR -->
+    <div class="ong-profile__main-toolbar" style="height: 55px">
+
+    </div>
+    <!-- FIM TOOLBAR -->
+
+    <!-- SEARCH -->
+    <div ng-show="false" class="ong-profile__main-search">
+        <div class="ong-profile__main-search-control">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Pesquisar tarefa</label>
+                <input ng-model="controller.search">
+                <md-button
+                    ng-click="controller.searchTasks(controller.search)"
+                    md-no-ink
+                    class="md-primary u-float-right">
+                        Pesquisar
+                </md-button>
+            </md-input-container>
+        </div>
+    </div>
+    <!-- FIM SEARCH  -->
+
+    <!-- TAREFAS -->
+    <div class="ong-profile__main-tasks">
+        <ul>
+            <li
+                ng-repeat="task in controller.ong.tasks track by $index"
+                ui-sref="ong.taskDetail({taskId : task.id})"
+                class="ong-profile__task">
+                    <div class="ong-profile__task-title">
+                        {{ task.title }}
+                    </div>
+                    <div class="ong-profile__task-status">
+                        <div class="badge-status">{{ task.status }}</div>
+                    </div>
+            </li>
+            <li ng-show="controller.isTaskListEmpty()"
+                class="u-margin-top-5 u-margin-bottom-5 u-text-align-center">
+                <div class="u-text-align-center">
+                    Não há nenhuma tarefa cadastrada nesta instituição
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- FIM TAREFAS -->
+</div>

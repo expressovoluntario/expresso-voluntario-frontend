@@ -21,7 +21,7 @@
 
 
     function config($mdThemingProvider, $httpProvider, $resourceProvider, AnalyticsProvider) {
-        // Não remover as barras da url
+        // Impede que as barras da url sejam removidas
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
         // Configura a paleta de cores do angular material
@@ -74,10 +74,12 @@
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            var path, publicPages, isRestrictedPage, isAuthenticated;
+            var path, regMatchOngsPages, publicPages, isRestrictedPage, isAuthenticated;
             path = $location.path();
             publicPages = ['', '/login', '/signup', '/pesquisar'];
             isRestrictedPage = _.indexOf(publicPages, path) === -1;
+            regMatchOngsPages = /ong\//;
+            isRestrictedPage = isRestrictedPage && !regMatchOngsPages.test(path);
             isAuthenticated = UserSession.isAuthenticated();
             if (isRestrictedPage && !isAuthenticated) {
                 $location.path('/login');
@@ -139,6 +141,184 @@
             $mdOpenMenu(ev);
         }
     }
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.components')
+        .directive('expressoSearch', expressoSearch)
+        .controller('expressoSearchCtrl', expressoSearchCtrl)
+
+    function expressoSearch() {
+        return {
+            'restrict': 'E',
+            'templateUrl': '/app/components/expressoSearch/expressoSearch.html',
+            'scope': {},
+            'controller': expressoSearchCtrl,
+            'controllerAs': 'controller'
+        }
+    }
+
+    function expressoSearchCtrl($http, SearchResource) {
+        var controller = this;
+        init();
+
+        function init() {
+            _getCities();
+
+            // VARIÁVEIS
+            controller.result = [];
+            controller.resultOngs = [];
+            controller.cities = [];
+            controller.searchTask = {};
+            controller.searchTask.title = '';
+            controller.searchTask.tag = '';
+            controller.searchTask.location = '';
+            controller.searchTaskRemote = {};
+            controller.searchTaskRemote.tag = '';
+            controller.searchOng = {};
+            controller.searchOng.name = '';
+            controller.searchOng.location = '';
+            controller.currentTab = 'tasks';
+            controller.isFirstQuery= true;
+
+            // FUNÇÕES
+            controller.setCurrentTab = setCurrentTab;
+            controller.isCurrentTab = isCurrentTab;
+            controller.isResultEmpty = isResultEmpty;
+            controller.getTaskByTitleAndLocation = getTaskByTitleAndLocation;
+            controller.getTaskByTagAndLocation = getTaskByTagAndLocation;
+            controller.getTaskByTagAndRemote = getTaskByTagAndRemote;
+            controller.getOngsByNameAndLocation = getOngsByNameAndLocation;
+        }
+
+        //////////////////////////
+        // FUNÇÕES PÚBLICAS
+        //////////////////////////
+
+        function getTaskByTitleAndLocation() {
+            if (controller.searchTask.title) {
+                SearchResource.query({ data : 'task', title : controller.searchTask.title })
+                    .$promise.then(function(response) {
+                        if (controller.searchTask.location) {
+                            controller.result = response.filter(function(task) {
+                                return task.location === controller.searchTask.location.trim();
+                            });
+                        } else {
+                            controller.result = response;
+                        }
+                    });
+
+            } else if (controller.searchTask.location) {
+                SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                    .$promise.then(function(response) {
+                        controller.result = response;
+                    });
+            }
+        }
+
+        function getTaskByTagAndLocation() {
+            if (controller.searchTask.tag) {
+                SearchResource.query({ data : 'task', tag : controller.searchTask.tag })
+                    .$promise.then(function(response) {
+                        if (controller.searchTask.location) {
+                            controller.result = response.filter(function(task) {
+                                return task.location === controller.searchTask.location.trim();
+                            });
+                        } else {
+                            controller.result = response;
+                        }
+                    });
+
+            } else if (controller.searchTask.location) {
+                SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                    .$promise.then(function(response) {
+                        controller.result = response;
+                    });
+            }
+        }
+
+        function getTaskByTagAndRemote() {
+            var params;
+
+            if (controller.searchTaskRemote.tag) {
+                params = {
+                    data : 'task',
+                    remote : true,
+                    tag : controller.searchTaskRemote.tag
+                };
+
+                SearchResource.query(params)
+                    .$promise.then(function(response) {
+                        controller.result = response;
+                    });
+            } else {
+                params = {
+                    data : 'task',
+                    remote : true
+                };
+
+                SearchResource.query(params)
+                    .$promise.then(function(response) {
+                        controller.result = response;
+                    });
+            }
+        }
+
+        function getOngsByNameAndLocation() {
+            if (controller.searchOng.name) {
+                SearchResource.query({ data : 'ong', name : controller.searchOng.name })
+                    .$promise.then(function(response) {
+                        if (controller.searchOng.location) {
+                            controller.resultOngs = response.filter(function(ong) {
+                                return ong.location === controller.searchOng.location.trim();
+                            });
+                        } else {
+                            controller.resultOngs = response;
+                        }
+                    });
+
+            } else if (controller.searchOng.location) {
+                SearchResource.query({ data : 'ong', location : controller.searchOng.location.trim() })
+                    .$promise.then(function(response) {
+                        controller.resultOngs = response;
+                    });
+            }
+        }
+
+        function isResultEmpty(result) {
+            return result.length === 0;
+        }
+
+        function setCurrentTab(tab) {
+            controller.currentTab = tab;
+        }
+
+        function isCurrentTab(tab) {
+            return tab === controller.currentTab;
+        }
+
+        //////////////////////////
+        // FUNÇÕES PRIVADAS
+        //////////////////////////
+        function _getCities() {
+            var cities, httpConfig;
+            httpConfig = {
+                method: 'GET',
+                url: 'http://localhost:5000/search',
+                params: {'data' : 'cities'}
+            };
+
+            $http(httpConfig).then(function(response) {
+                controller.cities = JSON.parse(response.data)
+            });
+        }
+
+    }
+
 })(angular);
 
 /* globals angular:false */
@@ -379,6 +559,7 @@
                 newTask.title = controller.newTask.title;
                 newTask.description = controller.newTask.description;
                 newTask.tags = controller.newTask.tags;
+                newTask.is_remote = controller.newTask.is_remote;
                 newTask.ong_id = controller.ong.id;
                 newTask.$save().then(function(response) {
                     var url;
@@ -844,61 +1025,219 @@
         .config(config)
         .controller('OngCtrl', OngCtrl);
 
+        // CONFIGURAÇÕES DE ROTAS
         function config ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("404");
 
             $stateProvider
-                .state('profile', {
-                    url: "/profile",
+                .state('ong', {
+                    url: "/ong/:ongId",
                     templateUrl: "/app/modules/ong/ong.html"
+                })
+                .state('ong.about', {
+                    url: "/sobre",
+                    templateUrl: "/app/modules/ong/partials/ong.about.html"
+                })
+                .state('ong.tasksList', {
+                    url: "/tarefas",
+                    templateUrl: "/app/modules/ong/partials/ong.tasksList.html"
+                })
+                .state('ong.taskDetail', {
+                    url: "/tarefa/:taskId",
+                    templateUrl: "/app/modules/ong/partials/ong.taskDetail.html",
+                    controller: OngTaskDetail,
+                    controllerAs: 'controller'
                 });
         }
 
-        function OngCtrl() {
+
+        function OngCtrl($http, $location, $stateParams, $rootScope, UserSession) {
             var controller = this;
             init();
 
             function init() {
-                // controller.isEditing = false;
-                controller.currentTab = 'tasks';
-                controller.taskTags = [];
-                controller.taskStatus = getStatusOptions();
-                controller.taskStatusSelected = null;
-                controller.taskRecurrence = getRecurrenceOptions();
-                controller.taskRecurrenceSelected = null;
-                controller.taskDescription = null;
+                _loadOng();
 
-                // controller.toggleEdit = toggleEdit;
-                controller.setCurrentTab = setCurrentTab;
+                // VARIÁVEIS
+
+                // FUNÇÕES
+                controller.getName = getName;
+                controller.getAddress = getAddress;
+                controller.getPhones = getPhones;
+                controller.getEmail = getEmail;
+                controller.isTaskListEmpty = isTaskListEmpty;
                 controller.isCurrentTab = isCurrentTab;
+
             }
 
-            // TASK
-            function getRecurrenceOptions() {
-                var options = ['única', 'recorrente'];
-                options = options.map(function(option) {
-                    return { label : option };
-                });
-                return options;
+            //////////////////////
+            // FUNÇÕES PÚBLICAS
+            //////////////////////
+
+            function getName() {
+                var output;
+
+                if (controller.ong && controller.ong.name) {
+                    output = controller.ong.name;
+                } else {
+                    output = 'Nome da instituição não informado';
+                }
+
+                return output;
             }
 
-            // TASK
-            function getStatusOptions() {
-                var options = ['aberto', 'concluído', 'andamento'];
-                options = options.map(function(option) {
-                    return { label : option };
-                });
-                return options;
+            function getAddress() {
+                var output;
+
+                if (controller.ong && controller.ong.address && !_.isEmpty(controller.ong.address)) {
+                    output = controller.ong.address.logradouro;
+                    if (controller.ong.addressNumber) {
+                        output += ', ' + controller.ong.addressNumber;
+                    }
+                    output += ' - ' + controller.ong.address.bairro;
+                    output += ' - ' + controller.ong.address.localidade;
+                    output += ' - ' + controller.ong.address.uf;
+                } else {
+                    output = 'Endereço da instituição não foi informado';
+                }
+
+                return output;
             }
 
+            function getPhones() {
+                var output;
 
-            function setCurrentTab(tab) {
-                controller.currentTab = tab;
+                if (controller.ong && controller.ong.phone1) {
+                    output = controller.ong.phone1;
+
+                    if (controller.ong.phone2) {
+                        output += ' | ' + controller.ong.phone2;
+                    }
+                } else {
+                    output = 'Telefone da instituição não foi informado';
+                }
+
+                return output;
+            }
+
+            function getEmail() {
+                var output;
+
+                if (controller.ong && controller.ong.email) {
+                    output = controller.ong.email;
+                } else {
+                    output = 'E-mail da instituição não foi informado';
+                }
+
+                return output;
+            }
+
+            function isTaskListEmpty() {
+                if(controller.ong.tasks && controller.ong.tasks.length === 0) {
+                    return true;
+                }
+                return false;
             }
 
             function isCurrentTab(tab) {
-                return controller.currentTab === tab;
+                var path, regxMatchTaskUrls, regxMatchAboutUrl;
+                path = $location.path();
+
+                if (tab === 'tasks') {
+                    regxMatchTaskUrls = /tarefa/;
+                    if (regxMatchTaskUrls.test(path)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (tab === 'about') {
+                    regxMatchAboutUrl = /sobre/;
+                    if (regxMatchAboutUrl.test(path)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
+
+
+            //////////////////////
+            // FUNÇÕES PRIVADAS
+            //////////////////////
+
+            function _loadOng() {
+                var ong, url, ongId;
+                ong = UserSession.getOng();
+
+                if (_.isEmpty(ong)) {
+                    ongId = $stateParams.ongId;
+                    url = 'http://localhost:5000/ong/' + ongId,
+                    $http.get(url).then(function(response){
+                        var ong;
+                        ong = response.data;
+                        ong.tasks = JSON.parse(ong.tasks);
+                        controller.ong = ong;
+                    });
+                }
+
+                controller.ong = ong;
+            }
+
+        }
+
+        function OngTaskDetail($stateParams, TaskResource) {
+            var controller = this;
+            init();
+
+            function init() {
+                _loadTask();
+
+                // VARIÁVEIS
+                controller.task = {};
+
+                // FUNÇÕES
+                controller.getTags = getTags;
+            }
+
+            //////////////////////
+            // FUNÇÕES PÚBLICAS
+            //////////////////////
+
+            function getTags() {
+                var output;
+
+                if (controller.task) {
+                    if (controller.task.tags && controller.task.tags.length === 0) {
+                        return 'Nenhuma palavra chave adicionada';
+                    }
+
+                    output = '';
+                    if (controller.task.tags) {
+                        controller.task.tags.forEach(function(tag) {
+                            output += tag + ', '
+                        });
+                        output = output.slice(0, -2);
+                    }
+                    return output;
+                }
+            }
+
+
+            //////////////////////
+            // FUNÇÕES PRIVADAS
+            //////////////////////
+
+            function _loadTask() {
+                var taskId, task;
+                taskId = $stateParams.taskId;
+                task = TaskResource.get({ id : taskId});
+                task.$promise.then(function(response){
+                    controller.task = response;
+                });
+            }
+
         }
 
 })(angular);
@@ -955,6 +1294,11 @@
                 controller.searchTask.title = '';
                 controller.searchTask.tag = '';
                 controller.searchTask.location = '';
+                controller.searchTaskRemote = {};
+                controller.searchTaskRemote.tag = '';
+                controller.searchOng = {};
+                controller.searchOng.name = '';
+                controller.searchOng.location = '';
                 controller.currentTab = 'tasks';
                 controller.isFirstQuery= true;
 
@@ -964,6 +1308,7 @@
                 controller.isResultEmpty = isResultEmpty;
                 controller.getTaskByTitleAndLocation = getTaskByTitleAndLocation;
                 controller.getTaskByTagAndLocation = getTaskByTagAndLocation;
+                controller.getTaskByTagAndRemote = getTaskByTagAndRemote;
                 controller.getOngsByNameAndLocation = getOngsByNameAndLocation;
             }
 
@@ -1007,6 +1352,33 @@
 
                 } else if (controller.searchTask.location) {
                     SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                }
+            }
+
+            function getTaskByTagAndRemote() {
+                var params;
+
+                if (controller.searchTaskRemote.tag) {
+                    params = {
+                        data : 'task',
+                        remote : true,
+                        tag : controller.searchTaskRemote.tag
+                    };
+
+                    SearchResource.query(params)
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                } else {
+                    params = {
+                        data : 'task',
+                        remote : true
+                    };
+
+                    SearchResource.query(params)
                         .$promise.then(function(response) {
                             controller.result = response;
                         });
@@ -1061,8 +1433,6 @@
                     controller.cities = JSON.parse(response.data)
                 });
             }
-
-
         }
 
 })(angular);
