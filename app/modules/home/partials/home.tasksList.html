@@ -16,20 +16,12 @@
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Pesquisar tarefa</label>
                 <input ng-model="controller.search">
-
-
-
                 <md-button
                     ng-click="controller.searchTasks(controller.search)"
                     md-no-ink
                     class="md-primary u-float-right">
-                        <!-- <md-icon md-svg-icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon> -->
                         Pesquisar
                 </md-button>
-
-                <!-- {{ controller.testetasks }} -->
-
-
             </md-input-container>
         </div>
     </div>
@@ -50,14 +42,13 @@
                     </div>
             </li>
             <li ng-show="controller.isTaskListEmpty()"
-                class="u-margin-top-5 u-margin-bottom-5 u-text-align">
+                class="u-margin-top-5 u-margin-bottom-5 u-text-align-center">
                 <md-button
                     ui-sref="home.newTask"
                     class="md-primary">
                         <md-icon md-svg-icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg"></md-icon>
                         Não há tarefas cadastradas. Adicione aqui
                 </md-button>
-
             </li>
         </ul>
     </div>

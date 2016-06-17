@@ -8,6 +8,7 @@
             'expresso.modules.index',
             'expresso.modules.login',
             'expresso.modules.ong',
+            'expresso.modules.search',
             'expresso.modules.services',
             'expresso.modules.sharedTemplates',
             'expresso.modules.task',

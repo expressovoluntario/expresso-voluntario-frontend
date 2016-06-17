@@ -76,39 +76,13 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var path, publicPages, isRestrictedPage, isAuthenticated;
             path = $location.path();
-            publicPages = ['', '/login', '/signup'];
+            publicPages = ['', '/login', '/signup', '/pesquisar'];
             isRestrictedPage = _.indexOf(publicPages, path) === -1;
             isAuthenticated = UserSession.isAuthenticated();
             if (isRestrictedPage && !isAuthenticated) {
                 $location.path('/login');
             }
         });
-
-
-
-        // $rootScope.globals = $cookies.getObject('globals') || {};
-        // if ($rootScope.globals.currentUser) {
-        //     url = 'http://localhost:5000/user/' + $rootScope.globals.currentUser.id;
-        //
-        //     $http.get(url)
-        //         .success(function successCallback(data) {
-        //             UserSession.setUser(data);
-
-                    // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-                    //     var path, publicPages, isRestrictedPage, isAuthenticated;
-                    //     path = $location.path();
-                    //     publicPages = ['', '/login', '/signup'];
-                    //     isRestrictedPage = _.indexOf(publicPages, path) === -1;
-                    //     isAuthenticated = UserSession.isAuthenticated();
-                    //     if (isRestrictedPage && !isAuthenticated) {
-                    //         $location.path('/login');
-                    //     }
-                    // });
-                // })
-                // .error(function errorCallback(response) {
-                //     console.log("Erro ao recuperar usuário logado. Resposta do servidor: " + response);
-                // });
-        // }
     }
 
     function analytics(Analytics) {}
@@ -172,11 +146,36 @@
     'use strict';
 
     angular
+        .module('expresso.components')
+        .directive('ngEnter', ngEnter)
+
+        function ngEnter() {
+            return function(scope, element, attrs) {
+                element.bind("keydown keypress", function(event) {
+                    if(event.which === 13) {
+                            scope.$apply(function(){
+                                    scope.$eval(attrs.ngEnter);
+                            });
+
+                            event.preventDefault();
+                    }
+                });
+            };
+        }
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
         .module('expresso.modules', [
             'expresso.modules.home',
             'expresso.modules.index',
             'expresso.modules.login',
             'expresso.modules.ong',
+            'expresso.modules.search',
             'expresso.modules.services',
             'expresso.modules.sharedTemplates',
             'expresso.modules.task',
@@ -914,6 +913,170 @@
 
     function OngResource($resource) {
         return $resource('http://localhost:5000/ong/:_id', {'_id' : '@_id'}, {
+            'update' : {
+                'method' : 'PUT'
+            }
+        });
+    }
+
+})(angular);
+
+/* globals angular:false */
+(function(angular) {
+    'use strict'
+
+    angular
+        .module('expresso.modules.search', [])
+        .config(config)
+        .controller('SearchCtrl', SearchCtrl);
+
+        function config ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise("404");
+
+            $stateProvider
+                .state('search', {
+                    url: "/pesquisar",
+                    templateUrl: "/app/modules/search/search.html"
+                });
+        }
+
+        function SearchCtrl($http, SearchResource) {
+            var controller = this;
+            init();
+
+            function init() {
+                _getCities();
+
+                // VARIÁVEIS
+                controller.result = [];
+                controller.resultOngs = [];
+                controller.cities = [];
+                controller.searchTask = {};
+                controller.searchTask.title = '';
+                controller.searchTask.tag = '';
+                controller.searchTask.location = '';
+                controller.currentTab = 'tasks';
+                controller.isFirstQuery= true;
+
+                // FUNÇÕES
+                controller.setCurrentTab = setCurrentTab;
+                controller.isCurrentTab = isCurrentTab;
+                controller.isResultEmpty = isResultEmpty;
+                controller.getTaskByTitleAndLocation = getTaskByTitleAndLocation;
+                controller.getTaskByTagAndLocation = getTaskByTagAndLocation;
+                controller.getOngsByNameAndLocation = getOngsByNameAndLocation;
+            }
+
+            //////////////////////////
+            // FUNÇÕES PÚBLICAS
+            //////////////////////////
+
+            function getTaskByTitleAndLocation() {
+                if (controller.searchTask.title) {
+                    SearchResource.query({ data : 'task', title : controller.searchTask.title })
+                        .$promise.then(function(response) {
+                            if (controller.searchTask.location) {
+                                controller.result = response.filter(function(task) {
+                                    return task.location === controller.searchTask.location.trim();
+                                });
+                            } else {
+                                controller.result = response;
+                            }
+                        });
+
+                } else if (controller.searchTask.location) {
+                    SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                }
+            }
+
+            function getTaskByTagAndLocation() {
+                if (controller.searchTask.tag) {
+                    SearchResource.query({ data : 'task', tag : controller.searchTask.tag })
+                        .$promise.then(function(response) {
+                            if (controller.searchTask.location) {
+                                controller.result = response.filter(function(task) {
+                                    return task.location === controller.searchTask.location.trim();
+                                });
+                            } else {
+                                controller.result = response;
+                            }
+                        });
+
+                } else if (controller.searchTask.location) {
+                    SearchResource.query({ data : 'task', location : controller.searchTask.location.trim() })
+                        .$promise.then(function(response) {
+                            controller.result = response;
+                        });
+                }
+            }
+
+            function getOngsByNameAndLocation() {
+                if (controller.searchOng.name) {
+                    SearchResource.query({ data : 'ong', name : controller.searchOng.name })
+                        .$promise.then(function(response) {
+                            if (controller.searchOng.location) {
+                                controller.resultOngs = response.filter(function(ong) {
+                                    return ong.location === controller.searchOng.location.trim();
+                                });
+                            } else {
+                                controller.resultOngs = response;
+                            }
+                        });
+
+                } else if (controller.searchOng.location) {
+                    SearchResource.query({ data : 'ong', location : controller.searchOng.location.trim() })
+                        .$promise.then(function(response) {
+                            controller.resultOngs = response;
+                        });
+                }
+            }
+
+            function isResultEmpty(result) {
+                return result.length === 0;
+            }
+
+            function setCurrentTab(tab) {
+                controller.currentTab = tab;
+            }
+
+            function isCurrentTab(tab) {
+                return tab === controller.currentTab;
+            }
+
+            //////////////////////////
+            // FUNÇÕES PRIVADAS
+            //////////////////////////
+            function _getCities() {
+                var cities, httpConfig;
+                httpConfig = {
+                    method: 'GET',
+                    url: 'http://localhost:5000/search',
+                    params: {'data' : 'cities'}
+                };
+
+                $http(httpConfig).then(function(response) {
+                    controller.cities = JSON.parse(response.data)
+                });
+            }
+
+
+        }
+
+})(angular);
+
+/* globals angular:false */
+(function (angular) {
+    'use strict';
+
+    angular
+        .module('expresso.modules.search')
+        .factory('SearchResource', SearchResource);
+
+    function SearchResource($resource) {
+        return $resource('http://localhost:5000/search/:id', {'id' : '@id'}, {
             'update' : {
                 'method' : 'PUT'
             }

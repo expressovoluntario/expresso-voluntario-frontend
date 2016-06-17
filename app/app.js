@@ -76,39 +76,13 @@
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             var path, publicPages, isRestrictedPage, isAuthenticated;
             path = $location.path();
-            publicPages = ['', '/login', '/signup'];
+            publicPages = ['', '/login', '/signup', '/pesquisar'];
             isRestrictedPage = _.indexOf(publicPages, path) === -1;
             isAuthenticated = UserSession.isAuthenticated();
             if (isRestrictedPage && !isAuthenticated) {
                 $location.path('/login');
             }
         });
-
-
-
-        // $rootScope.globals = $cookies.getObject('globals') || {};
-        // if ($rootScope.globals.currentUser) {
-        //     url = 'http://localhost:5000/user/' + $rootScope.globals.currentUser.id;
-        //
-        //     $http.get(url)
-        //         .success(function successCallback(data) {
-        //             UserSession.setUser(data);
-
-                    // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-                    //     var path, publicPages, isRestrictedPage, isAuthenticated;
-                    //     path = $location.path();
-                    //     publicPages = ['', '/login', '/signup'];
-                    //     isRestrictedPage = _.indexOf(publicPages, path) === -1;
-                    //     isAuthenticated = UserSession.isAuthenticated();
-                    //     if (isRestrictedPage && !isAuthenticated) {
-                    //         $location.path('/login');
-                    //     }
-                    // });
-                // })
-                // .error(function errorCallback(response) {
-                //     console.log("Erro ao recuperar usuário logado. Resposta do servidor: " + response);
-                // });
-        // }
     }
 
     function analytics(Analytics) {}
