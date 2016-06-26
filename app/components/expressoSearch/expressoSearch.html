@@ -20,43 +20,6 @@
                     <!-- PESQUISAR TAREFAS -->
                     <div ng-show="controller.isCurrentTab('tasks')">
                         <md-tabs md-dynamic-height md-border-bottom>
-                            <md-tab label="Pesquisar por título">
-
-                                <div class="ong-profile__main-toolbar">
-                                    <div class="u-padding-2 u-no-padding-bottom u-text-align-center">
-                                        <md-input-container class="md-block">
-                                            <label>Pesquisar por título da tarefa</label>
-                                            <input
-                                                ng-model="controller.searchTask.title"
-                                                ng-enter="controller.getTaskByTitleAndLocation()"
-                                                type="text">
-                                        </md-input-container>
-                                    </div>
-
-                                    <div class="u-padding-2 u-no-padding-top u-no-padding-bottom">
-                                        <md-input-container class="md-block">
-                                            <label>Filtrar por cidade:</label>
-                                            <md-select
-                                                ng-model="controller.searchTask.location"
-                                                md-on-close="controller.getTaskByTitleAndLocation()">
-                                                    <md-option ng-repeat="city in controller.cities" value="{{ city }}">
-                                                        {{ city }}
-                                                    </md-option>
-                                            </md-select>
-                                        </md-input-container>
-                                    </div>
-
-                                    <div class="u-text-align-center">
-                                        <md-button
-                                            ng-click="controller.getTaskByTitleAndLocation()"
-                                            class="md-raised md-primary">
-                                            <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
-                                            Pesquisar
-                                        </md-button>
-                                    </div>
-                                </div>
-                            </md-tab>
-
                             <md-tab label="Pesquisar por habilidade">
                                 <div class="ong-profile__main-toolbar">
                                     <div class="u-padding-2 u-no-padding-bottom u-text-align-center">
@@ -117,6 +80,42 @@
 
                             </md-tab>
 
+                            <md-tab label="Pesquisar por título">
+
+                                <div class="ong-profile__main-toolbar">
+                                    <div class="u-padding-2 u-no-padding-bottom u-text-align-center">
+                                        <md-input-container class="md-block">
+                                            <label>Pesquisar por título da tarefa</label>
+                                            <input
+                                                ng-model="controller.searchTask.title"
+                                                ng-enter="controller.getTaskByTitleAndLocation()"
+                                                type="text">
+                                        </md-input-container>
+                                    </div>
+
+                                    <div class="u-padding-2 u-no-padding-top u-no-padding-bottom">
+                                        <md-input-container class="md-block">
+                                            <label>Filtrar por cidade:</label>
+                                            <md-select
+                                                ng-model="controller.searchTask.location"
+                                                md-on-close="controller.getTaskByTitleAndLocation()">
+                                                    <md-option ng-repeat="city in controller.cities" value="{{ city }}">
+                                                        {{ city }}
+                                                    </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+
+                                    <div class="u-text-align-center">
+                                        <md-button
+                                            ng-click="controller.getTaskByTitleAndLocation()"
+                                            class="md-raised md-primary">
+                                            <md-icon md-svg-icon="bower_components/material-design-icons/editor/svg/production/ic_mode_edit_24px.svg"></md-icon>
+                                            Pesquisar
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </md-tab>
                         </md-tabs>
 
                         <!-- RESULTADOS DA BUSCA POR TAREFAS -->

@@ -417,15 +417,12 @@
                 controller.currentTab = 'tasks';
                 controller.ong = _loadOng();
                 controller.taskTags = [];
-
+                controller.cepFound = false;
                 controller.newTask = {};
                 controller.newTask.tags = [];
                 controller.newTask.title = '';
                 controller.newTask.description = '';
                 controller.newTask.status = '';
-
-                // TESTES
-                controller.searchTasks = searchTasks;
 
 
                 // FUNÇÕES
@@ -519,7 +516,8 @@
                 ong.phone2 = controller.ong.phone2;
                 ong.email = controller.ong.email;
 
-                if (controller.ong.address.cep && controller.ong.address.cep != '') {
+                // if (controller.ong.address.cep && controller.ong.address.cep != '') {
+                if (controller.cepFound) {
                     ong.address = {};
                     ong.address.cep = controller.ong.address.cep;
                     ong.address.logradouro = controller.ong.address.logradouro;
@@ -527,6 +525,7 @@
                     ong.address.bairro = controller.ong.address.bairro;
                     ong.address.localidade = controller.ong.address.localidade;
                     ong.address.uf = controller.ong.address.uf;
+                    controller.cepFound = false;
                 }
 
                 ong.$update();
@@ -565,6 +564,8 @@
                     var url;
                     url = '/inicio/tarefa/' + response.id;
                     _loadOng();
+                    _clearNewTaskFields();
+                    $rootScope.$broadcast('tasksListChanged');
                     $location.path(url);
                 });
 
@@ -584,6 +585,7 @@
 
                     promise = $http.get(url);
                     promise.then(function(response) {
+                        controller.cepFound = true;
                         controller.ong.address.logradouro = response.data.logradouro;
                         controller.ong.address.bairro = response.data.bairro;
                         controller.ong.address.localidade = response.data.localidade;
@@ -612,15 +614,6 @@
                         return false;
                     }
                 }
-            }
-
-            function searchTasks(tag) {
-                var url;
-
-                url = 'http://localhost:5000/task?location='+ tag;
-                $http.get(url).then(function(response) {
-                    controller.testetasks = response.data;
-                });
             }
 
             function isTaskListEmpty() {
@@ -677,6 +670,14 @@
                 controller.ong.address.bairro = '';
                 controller.ong.address.localidade = '';
                 controller.ong.address.uf = '';
+            }
+
+            function _clearNewTaskFields() {
+                controller.newTask = {};
+                controller.newTask.tags = [];
+                controller.newTask.title = '';
+                controller.newTask.description = '';
+                controller.newTask.status = '';
             }
 
             $rootScope.$on('tasksListChanged', function(event, data) {

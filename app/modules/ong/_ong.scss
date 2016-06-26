@@ -1,7 +1,7 @@
 .ong-profile__contact-wrapper {
     padding: $SPACING_1;
     border: 1px solid $DIVIDER_COLOR;
-    border-top: 3px solid $ACCENT_COLOR;
+    // border-top: 3px solid $ACCENT_COLOR;
     border-radius: 3px;
     background-color: #fff;
     @include m-box-shadow(1);
@@ -225,7 +225,7 @@
     }
 
     .ong-profile__task-detail-section {
-        padding: 0 $SPACING_2 $SPACING_2 $SPACING_2;
+        padding: $SPACING_2;
 
         pre {
             white-space: pre-line;
