@@ -10,10 +10,10 @@ var concat = require('gulp-concat');
     * Compila os arquivos do SASS
 */
 gulp.task('compass', function() {
-    gulp.src('./sass/**/*.scss')
+    gulp.src('./app/sass/**/*.scss')
         .pipe(compass({
             css: 'app/assets-generated/css',
-            sass: 'sass',
+            sass: 'app/sass',
             image: 'app/images'
         }));
 });
@@ -49,7 +49,7 @@ gulp.task('watch', function () {
 
     gulp.watch(['app/**/*.html', 'app/assets/css/*.css'], { 'cwd' : '.'}, browserSyncReload);
     gulp.watch('app/**/*.js', ['js-concat', browserSyncReload]);
-    gulp.watch(['sass/**/*.scss', 'app/**/*.scss'], ['compass']);
+    gulp.watch(['app/sass/**/*.scss', 'app/**/*.scss'], ['compass']);
 });
 
 
